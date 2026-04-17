@@ -1,4 +1,4 @@
-# Photography Portfolio (Next.js + Tailwind + Vercel Blob)
+<!-- # Photography Portfolio (Next.js + Tailwind + Vercel Blob)
 
 Single-page portfolio site with:
 - Hero (featured photo)
@@ -30,4 +30,4 @@ If you see `Can't resolve 'tailwindcss'`, check for lockfiles (e.g. `package-loc
 npm run photos:sync
 ```
 
-Re-running the script updates URLs/dimensions/EXIF while preserving existing `description` and `tags` edits per photo.
+Re-running the script updates URLs/dimensions/EXIF while preserving existing `description` and `tags` edits per photo. -->
