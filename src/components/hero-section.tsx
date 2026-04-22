@@ -4,7 +4,6 @@ import type { LucideIcon } from "lucide-react";
 import { Camera, Link as LinkIcon, Mail } from "lucide-react";
 
 import { site } from "@/content/site";
-import type { Photo } from "@/lib/types";
 
 type HeroLink = {
   label: string;
@@ -16,7 +15,7 @@ function isHttpUrl(value: string): boolean {
   return value.startsWith("http://") || value.startsWith("https://");
 }
 
-export function HeroSection({ featuredPhoto }: { featuredPhoto: Photo }) {
+export function HeroSection() {
   const links: HeroLink[] = [
     { label: "Email", href: site.contact.email, icon: Mail },
     { label: "LinkedIn", href: site.contact.linkedin, icon: LinkIcon },
@@ -27,17 +26,18 @@ export function HeroSection({ featuredPhoto }: { featuredPhoto: Photo }) {
     <section
       id="home"
       aria-label="Intro"
-      className="relative flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden py-16"
+      className="relative flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden bg-black py-16"
     >
       <Image
-        src={featuredPhoto.fullUrl}
-        alt={featuredPhoto.description}
+        src={site.heroBackgroundSrc}
+        alt={site.heroBackgroundAlt}
         fill
         priority
         sizes="100vw"
-        className="object-cover opacity-30 saturate-75"
+        className="object-cover opacity-75 saturate-75"
       />
-      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-black/75" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent via-black/70 to-black" />
 
       <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center">
         {site.hero.location ? (

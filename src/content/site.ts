@@ -4,9 +4,9 @@ export const site = {
     location: "Jakarta, Indonesia",
     name: "Elvern Neylmav Tanny",
     tagline: "Hobbyist Photographer",
-    ctaLabel: "View gallery",
   },
-  featuredPhotoId: "demo-12",
+  heroBackgroundSrc: "/demo/nasa-vhSz50AaFAs-unsplash.jpg",
+  heroBackgroundAlt: "Hero background",
   contact: {
     email: "mailto:elvernneylmav@gmail.com",
     linkedin: "https://www.linkedin.com/in/elvern-neylmav-t/",

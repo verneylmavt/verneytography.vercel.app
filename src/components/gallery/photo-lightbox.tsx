@@ -60,6 +60,9 @@ export function PhotoLightbox({
                   <Dialog.Title className="text-lg font-semibold tracking-tight text-white">
                     {photo.description}
                   </Dialog.Title>
+                  <Dialog.Description className="sr-only">
+                    Photo details and EXIF metadata.
+                  </Dialog.Description>
                   {photo.tags.length > 0 ? (
                     <div className="mt-3 flex flex-wrap gap-2">
                       {photo.tags.map((tag) => (
@@ -77,9 +80,7 @@ export function PhotoLightbox({
                 <div className="grid gap-3">
                   <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
                     <span className="text-white/55">Camera</span>
-                    <span className="text-white/85">
-                      {photo.exif?.camera ?? "—"}
-                    </span>
+                    <span className="text-white/85">{photo.exif?.camera ?? "—"}</span>
                   </div>
                   <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
                     <span className="text-white/55">Lens</span>
@@ -93,9 +94,7 @@ export function PhotoLightbox({
                   </div>
                   <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
                     <span className="text-white/55">Aperture</span>
-                    <span className="text-white/85">
-                      {photo.exif?.aperture ?? "—"}
-                    </span>
+                    <span className="text-white/85">{photo.exif?.aperture ?? "—"}</span>
                   </div>
                   <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
                     <span className="text-white/55">Shutter</span>
@@ -105,9 +104,7 @@ export function PhotoLightbox({
                   </div>
                   <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
                     <span className="text-white/55">ISO</span>
-                    <span className="text-white/85">
-                      {photo.exif?.iso ?? "—"}
-                    </span>
+                    <span className="text-white/85">{photo.exif?.iso ?? "—"}</span>
                   </div>
                   <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
                     <span className="text-white/55">Taken</span>

@@ -1,218 +1,38 @@
 [
   {
-    "id": "demo-12",
-    "thumbUrl": "/demo/placeholder-landscape.svg",
-    "fullUrl": "/demo/placeholder-landscape.svg",
-    "width": 1600,
-    "height": 1067,
-    "description": "Neon reflections in the rain.",
-    "tags": ["night", "street", "travel"],
+    "id": "1",
+    "thumbUrl": "/demo/1.jpg",
+    "fullUrl": "/demo/1_X.jpg",
+    "width": 5824,
+    "height": 3883,
+    "description": "Joyful students performing coordinated chant.",
+    "tags": ["street", "school", "joy"],
     "exif": {
-      "camera": "FUJIFILM X-T5",
-      "lens": "XF 35mm f/1.4",
-      "focalLength": "35mm",
-      "aperture": "f/1.4",
-      "shutterSpeed": "1/125",
-      "iso": 800,
-      "takenAt": "2026-04-12T14:12:00.000Z"
-    }
-  },
-  {
-    "id": "demo-11",
-    "thumbUrl": "/demo/placeholder-portrait.svg",
-    "fullUrl": "/demo/placeholder-portrait.svg",
-    "width": 1067,
-    "height": 1600,
-    "description": "Quiet portrait in window light.",
-    "tags": ["portrait", "people"],
-    "exif": {
-      "camera": "Sony A7 IV",
-      "lens": "FE 85mm f/1.8",
-      "focalLength": "85mm",
-      "aperture": "f/2.0",
-      "shutterSpeed": "1/200",
-      "iso": 320,
-      "takenAt": "2026-04-10T09:42:00.000Z"
-    }
-  },
-  {
-    "id": "demo-10",
-    "thumbUrl": "/demo/placeholder-square.svg",
-    "fullUrl": "/demo/placeholder-square.svg",
-    "width": 1600,
-    "height": 1600,
-    "description": "Details, symmetry, and texture.",
-    "tags": ["architecture", "detail"],
-    "exif": {
-      "camera": "Canon EOS R6",
-      "lens": "RF 24-70mm f/2.8",
+      "camera": "Sony A7 II",
+      "lens": "FE 50mm F1.8",
       "focalLength": "50mm",
-      "aperture": "f/4.0",
-      "shutterSpeed": "1/160",
-      "iso": 200,
-      "takenAt": "2026-04-08T12:05:00.000Z"
-    }
-  },
-  {
-    "id": "demo-09",
-    "thumbUrl": "/demo/placeholder-landscape.svg",
-    "fullUrl": "/demo/placeholder-landscape.svg",
-    "width": 1600,
-    "height": 1067,
-    "description": "Blue hour over the city.",
-    "tags": ["city", "landscape", "travel"],
-    "exif": {
-      "camera": "Nikon Z6 II",
-      "lens": "Z 24-120mm f/4",
-      "focalLength": "28mm",
-      "aperture": "f/4.0",
-      "shutterSpeed": "1/60",
-      "iso": 400,
-      "takenAt": "2026-04-05T11:18:00.000Z"
-    }
-  },
-  {
-    "id": "demo-08",
-    "thumbUrl": "/demo/placeholder-portrait.svg",
-    "fullUrl": "/demo/placeholder-portrait.svg",
-    "width": 1067,
-    "height": 1600,
-    "description": "Candid moment, soft focus.",
-    "tags": ["people", "street"],
-    "exif": {
-      "camera": "FUJIFILM X100V",
-      "lens": "23mm f/2",
-      "focalLength": "35mm",
-      "aperture": "f/2.0",
-      "shutterSpeed": "1/500",
+      "aperture": "F/1.8",
+      "shutterSpeed": "1/400",
       "iso": 500,
-      "takenAt": "2026-04-01T16:30:00.000Z"
+      "takenAt": "2019-07-16T09:45:00+07:00"
     }
   },
   {
-    "id": "demo-07",
-    "thumbUrl": "/demo/placeholder-square.svg",
-    "fullUrl": "/demo/placeholder-square.svg",
-    "width": 1600,
-    "height": 1600,
-    "description": "Natural patterns in motion.",
-    "tags": ["nature", "abstract"],
+    "id": "2",
+    "thumbUrl": "/demo/2.jpg",
+    "fullUrl": "/demo/2_X.jpg",
+    "width": 3799,
+    "height": 2533,
+    "description": "Child holding a flowing red cloth at night.",
+    "tags": ["street", "child", "night"],
     "exif": {
-      "camera": "Ricoh GR III",
-      "lens": "18.3mm f/2.8",
-      "focalLength": "28mm",
-      "aperture": "f/5.6",
-      "shutterSpeed": "1/250",
-      "iso": 200,
-      "takenAt": "2026-03-28T07:10:00.000Z"
-    }
-  },
-  {
-    "id": "demo-06",
-    "thumbUrl": "/demo/placeholder-landscape.svg",
-    "fullUrl": "/demo/placeholder-landscape.svg",
-    "width": 1600,
-    "height": 1067,
-    "description": "Golden light on the horizon.",
-    "tags": ["landscape", "travel"],
-    "exif": {
-      "camera": "Canon EOS R5",
-      "lens": "RF 15-35mm f/2.8",
-      "focalLength": "24mm",
-      "aperture": "f/8.0",
-      "shutterSpeed": "1/320",
-      "iso": 100,
-      "takenAt": "2026-03-22T17:55:00.000Z"
-    }
-  },
-  {
-    "id": "demo-05",
-    "thumbUrl": "/demo/placeholder-portrait.svg",
-    "fullUrl": "/demo/placeholder-portrait.svg",
-    "width": 1067,
-    "height": 1600,
-    "description": "Studio-style portrait, calm tones.",
-    "tags": ["portrait"],
-    "exif": {
-      "camera": "Sony A7R V",
-      "lens": "FE 50mm f/1.2",
+      "camera": "Sony A7 II",
+      "lens": "FE 50mm F1.8",
       "focalLength": "50mm",
-      "aperture": "f/2.8",
+      "aperture": "F/1.8",
       "shutterSpeed": "1/160",
-      "iso": 125,
-      "takenAt": "2026-03-18T03:20:00.000Z"
-    }
-  },
-  {
-    "id": "demo-04",
-    "thumbUrl": "/demo/placeholder-square.svg",
-    "fullUrl": "/demo/placeholder-square.svg",
-    "width": 1600,
-    "height": 1600,
-    "description": "Lines and shadows.",
-    "tags": ["architecture", "street"],
-    "exif": {
-      "camera": "Nikon Zf",
-      "lens": "Z 40mm f/2",
-      "focalLength": "40mm",
-      "aperture": "f/4.0",
-      "shutterSpeed": "1/250",
-      "iso": 220,
-      "takenAt": "2026-03-11T10:02:00.000Z"
-    }
-  },
-  {
-    "id": "demo-03",
-    "thumbUrl": "/demo/placeholder-landscape.svg",
-    "fullUrl": "/demo/placeholder-landscape.svg",
-    "width": 1600,
-    "height": 1067,
-    "description": "Street scene with layered light.",
-    "tags": ["street"],
-    "exif": {
-      "camera": "FUJIFILM X-Pro3",
-      "lens": "XF 23mm f/2",
-      "focalLength": "35mm",
-      "aperture": "f/2.0",
-      "shutterSpeed": "1/320",
-      "iso": 640,
-      "takenAt": "2026-03-04T18:48:00.000Z"
-    }
-  },
-  {
-    "id": "demo-02",
-    "thumbUrl": "/demo/placeholder-portrait.svg",
-    "fullUrl": "/demo/placeholder-portrait.svg",
-    "width": 1067,
-    "height": 1600,
-    "description": "Minimal portrait with negative space.",
-    "tags": ["portrait", "minimal"],
-    "exif": {
-      "camera": "Leica Q2",
-      "lens": "28mm f/1.7",
-      "focalLength": "28mm",
-      "aperture": "f/2.0",
-      "shutterSpeed": "1/1000",
-      "iso": 200,
-      "takenAt": "2026-02-20T05:10:00.000Z"
-    }
-  },
-  {
-    "id": "demo-01",
-    "thumbUrl": "/demo/placeholder-landscape.svg",
-    "fullUrl": "/demo/placeholder-landscape.svg",
-    "width": 1600,
-    "height": 1067,
-    "description": "First light, first frame.",
-    "tags": ["travel", "landscape"],
-    "exif": {
-      "camera": "FUJIFILM X-T30",
-      "lens": "XF 18-55mm f/2.8-4",
-      "focalLength": "18mm",
-      "aperture": "f/4.0",
-      "shutterSpeed": "1/500",
-      "iso": 160,
-      "takenAt": "2026-01-05T01:02:00.000Z"
+      "iso": 5000,
+      "takenAt": "2019-04-25T20:30:00+07:00"
     }
   }
 ]
