@@ -5,7 +5,7 @@ export const site = {
     name: "Elvern Neylmav Tanny",
     tagline: "Hobbyist Photographer",
   },
-  heroBackgroundSrc: "/demo/nasa-vhSz50AaFAs-unsplash.jpg",
+  heroBackgroundSrc: "/demo/nasa-Yj1M5riCKk4-unsplash.jpg",
   heroBackgroundAlt: "Hero background",
   contact: {
     email: "mailto:elvernneylmav@gmail.com",

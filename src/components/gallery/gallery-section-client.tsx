@@ -113,11 +113,20 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
   const openedViaClickRef = useRef(false);
 
   const tags = useMemo(() => {
-    const set = new Set<string>();
+    const tagCounts = new Map<string, number>();
     for (const photo of photos) {
-      for (const tag of photo.tags) set.add(tag);
+      for (const tag of new Set(photo.tags)) {
+        tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+      }
     }
-    return Array.from(set).sort((a, b) => a.localeCompare(b));
+
+    return Array.from(tagCounts.entries())
+      .sort((a, b) => {
+        const countDiff = b[1] - a[1];
+        if (countDiff !== 0) return countDiff;
+        return a[0].localeCompare(b[0]);
+      })
+      .map(([tag]) => tag);
   }, [photos]);
 
   const filtered = useMemo(() => {

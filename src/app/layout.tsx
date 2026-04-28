@@ -21,7 +21,7 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: `${site.hero.name} — Photography`,
+  title: `verneytography`,
   description: `${site.hero.tagline}.`,
 };
 

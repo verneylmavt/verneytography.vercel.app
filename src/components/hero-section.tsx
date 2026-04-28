@@ -36,7 +36,7 @@ export function HeroSection() {
         sizes="100vw"
         className="object-cover opacity-75 saturate-75"
       />
-      <div className="absolute inset-0 bg-black/75" />
+      <div className="absolute inset-0 bg-black/50" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent via-black/70 to-black" />
 
       <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center">
