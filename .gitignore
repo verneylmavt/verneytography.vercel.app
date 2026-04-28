@@ -3,6 +3,7 @@ AGENTS.md
 CLAUDE.md
 photos/
 
+
 # dependencies
 /node_modules
 /.pnp
@@ -39,8 +40,10 @@ dev.*.log
 .tmp-*.out
 .tmp-*.err
 
+
 # env files (can opt-in for committing if needed)
 .env*
+**/*_X.jpg
 
 # vercel
 .vercel
