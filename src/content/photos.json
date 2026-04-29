@@ -54,6 +54,24 @@
     }
   },
   {
+    "id": "4",
+    "thumbUrl": "/demo/4.jpg",
+    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/4_X.jpg",
+    "width": 5852,
+    "height": 3549,
+    "description": "Energetic dance performance before a giant flag backdrop.",
+    "tags": ["sports", "school", "dance"],
+    "exif": {
+      "camera": "Sony A7 II",
+      "lens": "FE 28-70mm F/3.5-5.6",
+      "focalLength": "28mm",
+      "aperture": "F/3.5",
+      "shutterSpeed": "1/2500",
+      "iso": 400,
+      "takenAt": "2019-08-16T07:30:00+07:00"
+    }
+  },
+  {
     "id": "10",
     "thumbUrl": "/demo/10.jpg",
     "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/10_X.jpg",
