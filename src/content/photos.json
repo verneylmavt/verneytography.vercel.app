@@ -9,7 +9,7 @@
     "tags": ["street", "school", "student"],
     "exif": {
       "camera": "Sony A7 II",
-      "lens": "FE 50mm F1.8",
+      "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
       "shutterSpeed": "1/400",
@@ -27,12 +27,30 @@
     "tags": ["sports", "basketball", "school"],
     "exif": {
       "camera": "Sony A7 II",
-      "lens": "FE 50mm F1.8",
+      "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
       "shutterSpeed": "1/320",
       "iso": 8000,
       "takenAt": "2018-08-20T19:11:00+07:00"
+    }
+  },
+  {
+    "id": "3",
+    "thumbUrl": "/demo/3.jpg",
+    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/3_X.jpg",
+    "width": 6000,
+    "height": 3824,
+    "description": "Clutch free throw under stadium lights.",
+    "tags": ["sports", "basketball", "school"],
+    "exif": {
+      "camera": "Sony A7 II",
+      "lens": "FE 28-70mm F/3.5-5.6",
+      "focalLength": "28mm",
+      "aperture": "F/5.6",
+      "shutterSpeed": "1/160",
+      "iso": 1600,
+      "takenAt": "2019-09-03T15:43:00+07:00"
     }
   },
   {
@@ -45,7 +63,7 @@
     "tags": ["street", "child", "night"],
     "exif": {
       "camera": "Sony A7 II",
-      "lens": "FE 50mm F1.8",
+      "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
       "shutterSpeed": "1/160",
