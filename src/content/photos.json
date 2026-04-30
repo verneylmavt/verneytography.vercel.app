@@ -90,6 +90,24 @@
     }
   },
   {
+    "id": "6",
+    "thumbUrl": "/demo/6.jpg",
+    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/6_X.jpg",
+    "width": 5286,
+    "height": 3524,
+    "description": "MVP free throw amid a fierce rivalry showdown.",
+    "tags": ["sports", "basketball", "school"],
+    "exif": {
+      "camera": "Sony A7 II",
+      "lens": "FE 50mm F/1.8",
+      "focalLength": "50mm",
+      "aperture": "F/1.8",
+      "shutterSpeed": "1/800",
+      "iso": 3200,
+      "takenAt": "2019-09-21T18:50:00+07:00"
+    }
+  },
+  {
     "id": "10",
     "thumbUrl": "/demo/10.jpg",
     "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/10_X.jpg",
