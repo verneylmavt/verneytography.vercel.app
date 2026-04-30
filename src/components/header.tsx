@@ -1,6 +1,5 @@
 "use client";
 
-import * as Dialog from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import {
@@ -62,6 +61,8 @@ export function Header() {
   const activeId = useActiveSection(sectionIds);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement | null>(null);
   const navRef = useRef<HTMLUListElement | null>(null);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const [highlight, setHighlight] = useState<{
@@ -110,10 +111,33 @@ export function Header() {
     return () => observer.disconnect();
   }, [updateHighlight]);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileMenuOpen(false);
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+      if (!(target instanceof Node)) return;
+      if (mobileMenuButtonRef.current?.contains(target)) return;
+      if (mobileMenuRef.current?.contains(target)) return;
+      setMobileMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("pointerdown", handlePointerDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header
       className={[
-        "sticky top-0 z-40 w-full",
+        "sticky top-0 z-40 w-full relative",
         scrolled
           ? "bg-[rgb(var(--background)/0.6)] backdrop-blur-xl"
           : "bg-[rgb(var(--background)/0.15)] backdrop-blur-md",
@@ -171,71 +195,67 @@ export function Header() {
             </ul>
           </nav>
 
-          <Dialog.Root open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-            <Dialog.Trigger asChild>
-              <button
-                type="button"
-                className={[
-                  "inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border)/0.14)] md:hidden",
-                  "bg-[rgb(var(--background)/0.35)] text-foreground/90 backdrop-blur-md transition",
-                  "hover:border-[rgb(var(--border)/0.22)] hover:bg-[rgb(var(--background)/0.55)] hover:text-foreground",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                ].join(" ")}
-                aria-label="Open menu"
-              >
-                <Menu aria-hidden className="h-5 w-5" />
-              </button>
-            </Dialog.Trigger>
-
-            <Dialog.Portal>
-              <Dialog.Overlay className="fixed inset-0 z-50 bg-black/55 backdrop-blur-sm data-[state=open]:animate-[fadeIn_220ms_ease-out] data-[state=closed]:animate-[fadeOut_180ms_ease-in]" />
-              <Dialog.Content className="fixed left-1/2 top-[4.5rem] z-50 w-[min(360px,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.75)] p-2 shadow-2xl backdrop-blur-xl focus:outline-none data-[state=open]:animate-[zoomIn_220ms_ease-out] data-[state=closed]:animate-[zoomOut_180ms_ease-in]">
-                <div className="flex items-center justify-between px-2 py-2">
-                  <p className="text-xs font-semibold tracking-tight text-foreground/90">
-                    Navigate
-                  </p>
-                  <Dialog.Close asChild>
-                    <button
-                      type="button"
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.35)] text-foreground/90 backdrop-blur transition hover:border-[rgb(var(--border)/0.22)] hover:bg-[rgb(var(--background)/0.55)] hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)]"
-                      aria-label="Close menu"
-                    >
-                      <X aria-hidden className="h-4 w-4" />
-                    </button>
-                  </Dialog.Close>
-                </div>
-
-                <div className="grid gap-1 p-1">
-                  {sections.map((section) => {
-                    const active = activeId === section.id;
-
-                    return (
-                      <Link
-                        key={section.id}
-                        href={`#${section.id}`}
-                        onClick={() => setMobileMenuOpen(false)}
-                        aria-current={active ? "page" : undefined}
-                        className={[
-                          "flex items-center justify-between rounded-xl border px-4 py-3 text-sm transition-colors",
-                          active
-                            ? "border-[rgb(var(--border)/0.20)] bg-[rgb(var(--foreground)/0.08)] text-foreground"
-                            : "border-[rgb(var(--border)/0.12)] bg-[rgb(var(--surface)/0.25)] text-foreground/85 hover:border-[rgb(var(--border)/0.18)] hover:bg-[rgb(var(--surface)/0.35)]",
-                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                        ].join(" ")}
-                      >
-                        <span>{section.label}</span>
-                        <span className="text-foreground/55">{"\u2192"}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </Dialog.Content>
-            </Dialog.Portal>
-          </Dialog.Root>
+          <button
+            ref={mobileMenuButtonRef}
+            type="button"
+            onClick={() => setMobileMenuOpen((value) => !value)}
+            className={[
+              "inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border)/0.14)] md:hidden",
+              "bg-[rgb(var(--background)/0.35)] text-foreground/90 backdrop-blur-md transition",
+              "hover:border-[rgb(var(--border)/0.22)] hover:bg-[rgb(var(--background)/0.55)] hover:text-foreground",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            ].join(" ")}
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav"
+          >
+            {mobileMenuOpen ? (
+              <X aria-hidden className="h-5 w-5" />
+            ) : (
+              <Menu aria-hidden className="h-5 w-5" />
+            )}
+          </button>
         </div>
 
         <div className="justify-self-end" aria-hidden />
       </div>
+
+      {mobileMenuOpen ? (
+        <div
+          ref={mobileMenuRef}
+          id="mobile-nav"
+          className="absolute left-0 right-0 top-full z-40 md:hidden"
+        >
+          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="mt-3 max-h-[calc(100svh-4.5rem)] overflow-y-auto rounded-2xl border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.55)] p-2 shadow-2xl backdrop-blur-xl">
+              <div className="grid gap-1 p-1">
+                {sections.map((section) => {
+                  const active = activeId === section.id;
+
+                  return (
+                    <Link
+                      key={section.id}
+                      href={`#${section.id}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      aria-current={active ? "page" : undefined}
+                      className={[
+                        "flex items-center justify-between rounded-xl border px-4 py-3 text-sm transition-colors",
+                        active
+                          ? "border-[rgb(var(--border)/0.20)] bg-[rgb(var(--foreground)/0.08)] text-foreground"
+                          : "border-[rgb(var(--border)/0.12)] bg-[rgb(var(--surface)/0.20)] text-foreground/85 hover:border-[rgb(var(--border)/0.18)] hover:bg-[rgb(var(--surface)/0.30)]",
+                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                      ].join(" ")}
+                    >
+                      <span>{section.label}</span>
+                      <span className="text-foreground/55">{"\u2192"}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 }
