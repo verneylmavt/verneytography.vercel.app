@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import type { Photo } from "@/lib/types";
 
@@ -139,6 +139,16 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
     return photos.find((photo) => photo.id === selectedPhotoId) ?? null;
   }, [photos, selectedPhotoId]);
 
+  useEffect(() => {
+    if (!selectedPhotoId) return;
+    if (selectedPhoto) return;
+
+    const next = new URLSearchParams(searchParams.toString());
+    next.delete("photo");
+    openedViaClickRef.current = false;
+    router.replace(buildUrl(pathname, next), { scroll: false });
+  }, [pathname, router, searchParams, selectedPhoto, selectedPhotoId]);
+
   function setTag(tag: string | null) {
     const next = new URLSearchParams(searchParams.toString());
     if (!tag) next.delete("tag");
@@ -234,7 +244,7 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
 
       <PhotoLightbox
         photo={selectedPhoto}
-        open={Boolean(selectedPhotoId)}
+        open={Boolean(selectedPhoto)}
         onClose={closePhoto}
       />
     </>

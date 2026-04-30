@@ -43,19 +43,19 @@ export function PhotoLightbox({
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm data-[state=open]:animate-[fadeIn_220ms_ease-out] data-[state=closed]:animate-[fadeOut_180ms_ease-in]" />
         <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(1100px,calc(100vw-2.25rem))] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-white/10 bg-black/55 shadow-2xl backdrop-blur-xl focus:outline-none data-[state=open]:animate-[zoomIn_220ms_ease-out] data-[state=closed]:animate-[zoomOut_180ms_ease-in]">
           {photo ? (
-            <div className="grid max-h-[85svh] grid-cols-1 lg:grid-cols-[1.2fr_0.8fr]">
-              <div className="relative bg-black">
+            <div className="flex max-h-[85svh] flex-col lg:flex-row">
+              <div className="relative flex max-h-[45svh] items-center justify-center bg-black p-4 sm:p-5 lg:max-h-none lg:flex-[1.2] lg:p-0">
                 <Image
                   src={photo.fullUrl}
                   alt={photo.description}
                   width={photo.width}
                   height={photo.height}
                   sizes="(min-width: 1024px) 65vw, 100vw"
-                  className="h-auto w-full select-none object-contain"
+                  className="h-auto max-h-full w-auto max-w-full select-none object-contain"
                 />
               </div>
 
-              <div className="flex flex-col gap-8 overflow-y-auto p-6 sm:p-8">
+              <div className="min-h-0 flex-1 overflow-y-auto border-t border-white/10 p-6 sm:p-8 lg:flex-[0.8] lg:border-l lg:border-t-0">
                 <div>
                   <Dialog.Title className="text-lg font-semibold tracking-tight text-white">
                     {photo.description}
@@ -78,37 +78,47 @@ export function PhotoLightbox({
                 </div>
 
                 <div className="grid gap-3">
-                  <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
+                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
                     <span className="text-white/55">Camera</span>
-                    <span className="text-white/85">{photo.exif?.camera ?? "—"}</span>
+                    <span className="min-w-0 break-words text-white/85">
+                      {photo.exif?.camera ?? "—"}
+                    </span>
                   </div>
-                  <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
+                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
                     <span className="text-white/55">Lens</span>
-                    <span className="text-white/85">{photo.exif?.lens ?? "—"}</span>
+                    <span className="min-w-0 break-words text-white/85">
+                      {photo.exif?.lens ?? "—"}
+                    </span>
                   </div>
-                  <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
+                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
                     <span className="text-white/55">Focal length</span>
-                    <span className="text-white/85">
+                    <span className="min-w-0 break-words text-white/85">
                       {photo.exif?.focalLength ?? "—"}
                     </span>
                   </div>
-                  <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
+                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
                     <span className="text-white/55">Aperture</span>
-                    <span className="text-white/85">{photo.exif?.aperture ?? "—"}</span>
+                    <span className="min-w-0 break-words text-white/85">
+                      {photo.exif?.aperture ?? "—"}
+                    </span>
                   </div>
-                  <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
+                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
                     <span className="text-white/55">Shutter</span>
-                    <span className="text-white/85">
+                    <span className="min-w-0 break-words text-white/85">
                       {photo.exif?.shutterSpeed ?? "—"}
                     </span>
                   </div>
-                  <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
+                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
                     <span className="text-white/55">ISO</span>
-                    <span className="text-white/85">{photo.exif?.iso ?? "—"}</span>
+                    <span className="min-w-0 break-words text-white/85">
+                      {photo.exif?.iso ?? "—"}
+                    </span>
                   </div>
-                  <div className="grid grid-cols-[130px_1fr] gap-3 text-sm">
+                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
                     <span className="text-white/55">Taken</span>
-                    <span className="text-white/85">{takenAt ?? "—"}</span>
+                    <span className="min-w-0 break-words text-white/85">
+                      {takenAt ?? "—"}
+                    </span>
                   </div>
                 </div>
               </div>

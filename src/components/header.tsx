@@ -116,10 +116,10 @@ export function Header() {
           : "bg-[rgb(var(--background)/0.15)] backdrop-blur-md",
       ].join(" ")}
     >
-      <div className="mx-auto grid h-16 w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-3 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto grid h-16 w-full max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
         <Link
           href="#home"
-          className="justify-self-start text-sm font-semibold tracking-tight text-foreground transition hover:text-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="justify-self-start text-xs font-semibold tracking-tight text-foreground transition hover:text-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:text-sm"
         >
           {site.brand}
         </Link>
@@ -130,12 +130,12 @@ export function Header() {
         >
           <ul
             ref={navRef}
-            className="relative flex items-center gap-1 rounded-full border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.35)] p-1 backdrop-blur-md"
+            className="relative flex items-center gap-1 rounded-full border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.35)] p-0.5 backdrop-blur-md sm:p-1"
           >
             <span
               aria-hidden
               className={[
-                "pointer-events-none absolute inset-y-1 left-0 rounded-full bg-[rgb(var(--foreground)/0.08)]",
+                "pointer-events-none absolute inset-y-0.5 left-0 rounded-full bg-[rgb(var(--foreground)/0.08)] sm:inset-y-1",
                 "transition-[transform,width,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
                 highlight.ready ? "opacity-100" : "opacity-0",
               ].join(" ")}
@@ -155,7 +155,7 @@ export function Header() {
                     }}
                     aria-current={active ? "page" : undefined}
                     className={[
-                      "relative z-10 rounded-full px-3 py-2 text-sm transition-colors",
+                      "relative z-10 rounded-full px-2.5 py-1.5 text-xs transition-colors sm:px-3 sm:py-2 sm:text-sm",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                       active ? "text-foreground" : "text-muted hover:text-foreground",
                     ].join(" ")}
