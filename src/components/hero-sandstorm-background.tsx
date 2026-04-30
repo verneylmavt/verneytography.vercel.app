@@ -29,11 +29,22 @@ type SandstormField = {
   waveAmplitudes: Float32Array;
 };
 
+type SandstormLayer = {
+  field: SandstormField;
+  offsetY: number;
+  phaseShift: number;
+};
+
 type PointerState = {
   currentX: number;
   currentY: number;
   targetX: number;
   targetY: number;
+};
+
+type ScrollState = {
+  current: number;
+  target: number;
 };
 
 function randomBetween(min: number, max: number): number {
@@ -44,14 +55,13 @@ function centeredRandom(): number {
   return Math.random() + Math.random() - 1;
 }
 
-function wrap(value: number, min: number, max: number): number {
-  const span = max - min;
-  return ((((value - min) % span) + span) % span) + min;
+function softCenteredRandom(): number {
+  return (centeredRandom() + centeredRandom()) * 0.5;
 }
 
 function getParticleCount(width: number, reducedMotion: boolean): number {
-  if (reducedMotion) return width < 768 ? 18000 : 28000;
-  return width < 768 ? 32000 : 54000;
+  if (reducedMotion) return width < 768 ? 6500 : 9000;
+  return width < 768 ? 11000 : 15000;
 }
 
 function createMaterial(THREE: ThreeModule): ShaderMaterial {
@@ -116,11 +126,15 @@ function createSandstormField(
   const swayAmounts = new Float32Array(count);
   const pulseSpeeds = new Float32Array(count);
   const pulseAmplitudes = new Float32Array(count);
-  const clusterAnchors = Array.from({ length: 8 }, () => ({
-    x: randomBetween(-12, 12),
-    y: randomBetween(-7, 5),
-    z: randomBetween(-4, 7),
-  }));
+  const clusterAnchors = [
+    { x: 0, y: 0, z: 0, spreadX: 15, spreadY: 12, spreadZ: 4.5 },
+    { x: -12, y: 8, z: -1, spreadX: 9, spreadY: 8, spreadZ: 3.8 },
+    { x: 12, y: -8, z: 1, spreadX: 9, spreadY: 8, spreadZ: 3.8 },
+    { x: 0, y: 18, z: -1, spreadX: 12, spreadY: 7, spreadZ: 4 },
+    { x: 0, y: -18, z: 1, spreadX: 12, spreadY: 7, spreadZ: 4 },
+    { x: -22, y: 0, z: -2, spreadX: 7, spreadY: 11, spreadZ: 4.2 },
+    { x: 22, y: 0, z: -2, spreadX: 7, spreadY: 11, spreadZ: 4.2 },
+  ] as const;
 
   for (let index = 0; index < count; index += 1) {
     const offset = index * 3;
@@ -137,38 +151,50 @@ function createSandstormField(
     let pulseSpeed = 0.8;
     let pulseAmplitude = 0.08;
 
-    if (layer < 0.72) {
+    if (layer < 0.44) {
       baseX = randomBetween(-40, 40);
-      baseY = randomBetween(-22, 24);
+      baseY = randomBetween(-38, 38);
       baseZ = randomBetween(-24, -1);
-      scale = randomBetween(0.45, 1.15);
-      alpha = randomBetween(0.11, 0.24);
+      scale = randomBetween(0.4, 1.0);
+      alpha = randomBetween(0.08, 0.18);
       tone = randomBetween(0.24, 0.48);
       drift = randomBetween(0.55, 1.45);
       wave = randomBetween(0.24, 0.68);
       sway = randomBetween(0.16, 0.55);
       pulseSpeed = randomBetween(0.35, 0.75);
       pulseAmplitude = randomBetween(0.02, 0.05);
-    } else if (layer < 0.93) {
-      baseX = randomBetween(-34, 34);
-      baseY = randomBetween(-16, 18);
-      baseZ = randomBetween(-16, 10);
-      scale = randomBetween(0.95, 2.1);
-      alpha = randomBetween(0.15, 0.3);
-      tone = randomBetween(0.46, 0.74);
-      drift = randomBetween(0.8, 1.9);
-      wave = randomBetween(0.65, 1.45);
-      sway = randomBetween(0.45, 1.3);
-      pulseSpeed = randomBetween(0.45, 1.15);
+    } else if (layer < 0.72) {
+      baseX = softCenteredRandom() * randomBetween(14, 34);
+      baseY = softCenteredRandom() * randomBetween(16, 30);
+      baseZ = randomBetween(-18, 9);
+      scale = randomBetween(0.8, 1.85);
+      alpha = randomBetween(0.12, 0.24);
+      tone = randomBetween(0.44, 0.74);
+      drift = randomBetween(0.75, 1.7);
+      wave = randomBetween(0.72, 1.6);
+      sway = randomBetween(0.5, 1.35);
+      pulseSpeed = randomBetween(0.45, 1.2);
       pulseAmplitude = randomBetween(0.03, 0.08);
-    } else if (layer < 0.995) {
+    } else if (layer < 0.88) {
+      baseX = softCenteredRandom() * randomBetween(12, 24);
+      baseY = softCenteredRandom() * randomBetween(12, 24);
+      baseZ = randomBetween(-12, 8);
+      scale = randomBetween(1.0, 2.15);
+      alpha = randomBetween(0.16, 0.3);
+      tone = randomBetween(0.52, 0.8);
+      drift = randomBetween(0.5, 1.1);
+      wave = randomBetween(1.15, 2.1);
+      sway = randomBetween(0.8, 1.85);
+      pulseSpeed = randomBetween(0.7, 1.5);
+      pulseAmplitude = randomBetween(0.05, 0.11);
+    } else if (layer < 0.976) {
       const anchor =
         clusterAnchors[Math.floor(Math.random() * clusterAnchors.length)];
-      baseX = anchor.x + centeredRandom() * randomBetween(1.8, 5.8);
-      baseY = anchor.y + centeredRandom() * randomBetween(1.6, 4.6);
-      baseZ = anchor.z + centeredRandom() * randomBetween(1.2, 4.2);
-      scale = randomBetween(1.55, 3.8);
-      alpha = randomBetween(0.34, 0.74);
+      baseX = anchor.x + softCenteredRandom() * anchor.spreadX;
+      baseY = anchor.y + softCenteredRandom() * anchor.spreadY;
+      baseZ = anchor.z + softCenteredRandom() * anchor.spreadZ;
+      scale = randomBetween(1.2, 2.8);
+      alpha = randomBetween(0.24, 0.48);
       tone = randomBetween(0.84, 1.0);
       drift = randomBetween(0.35, 0.95);
       wave = randomBetween(1.55, 3.15);
@@ -176,11 +202,11 @@ function createSandstormField(
       pulseSpeed = randomBetween(0.8, 1.7);
       pulseAmplitude = randomBetween(0.05, 0.12);
     } else {
-      baseX = randomBetween(-32, 32);
-      baseY = randomBetween(-24, -7);
+      baseX = softCenteredRandom() * randomBetween(14, 32);
+      baseY = softCenteredRandom() * randomBetween(18, 32);
       baseZ = randomBetween(8, 15);
-      scale = randomBetween(2.8, 4.8);
-      alpha = randomBetween(0.12, 0.22);
+      scale = randomBetween(2.2, 3.8);
+      alpha = randomBetween(0.08, 0.16);
       tone = randomBetween(0.52, 0.82);
       drift = randomBetween(0.28, 0.75);
       wave = randomBetween(0.85, 1.85);
@@ -188,6 +214,13 @@ function createSandstormField(
       pulseSpeed = randomBetween(0.22, 0.55);
       pulseAmplitude = randomBetween(0.03, 0.07);
     }
+
+    const centerWeight = Math.max(
+      0,
+      1 - Math.hypot(baseX / 30, baseY / 26),
+    );
+    alpha *= 1 + centerWeight * 0.08;
+    tone = Math.min(1, tone + centerWeight * 0.02);
 
     positions[offset] = baseX;
     positions[offset + 1] = baseY;
@@ -220,8 +253,8 @@ function createSandstormField(
 
   const points = new THREE.Points(geometry, createMaterial(THREE));
   points.frustumCulled = false;
-  points.position.set(0, -1.5, 0);
-  points.rotation.set(-0.12, 0.08, -0.06);
+  points.position.set(0, 0, 0);
+  points.rotation.set(-0.04, 0.04, -0.02);
 
   return {
     alphaAttribute,
@@ -242,7 +275,11 @@ function createSandstormField(
   };
 }
 
-function updateSandstormField(field: SandstormField, elapsed: number): void {
+function updateSandstormField(
+  field: SandstormField,
+  elapsed: number,
+  scrollPhase: number,
+): void {
   const alphaValues = field.alphaAttribute.array as Float32Array;
 
   for (let index = 0; index < field.baseAlphas.length; index += 1) {
@@ -251,39 +288,38 @@ function updateSandstormField(field: SandstormField, elapsed: number): void {
     const baseY = field.basePositions[offset + 1];
     const baseZ = field.basePositions[offset + 2];
     const phase = field.phaseOffsets[index];
-    const drift = field.driftSpeeds[index];
     const wave = field.waveAmplitudes[index];
     const sway = field.swayAmounts[index];
     const pulseSpeed = field.pulseSpeeds[index];
     const pulseAmplitude = field.pulseAmplitudes[index];
+    const flowPhase = elapsed + scrollPhase * 0.9;
 
-    const windX = wrap(baseX - elapsed * drift * 2.8, -46, 46);
-    const ribbon = Math.sin(baseY * 0.26 + elapsed * 0.88 + phase) * wave;
-    const crest =
-      Math.cos(windX * 0.22 - elapsed * 0.62 + phase * 1.45) * sway;
+    const windX = baseX;
+    const ribbon = Math.sin(baseY * 0.26 + flowPhase * 0.88 + phase) * wave;
     const shimmer =
-      Math.sin(baseZ * 0.28 + elapsed * 1.32 + phase * 2.0) * 0.32;
+      Math.sin(baseZ * 0.28 + flowPhase * 1.32 + phase * 2.0) * 0.32;
 
-    field.positions[offset] = windX + ribbon * 0.9 + crest * 0.58;
+    field.positions[offset] = windX;
     field.positions[offset + 1] =
       baseY +
-      Math.sin(windX * 0.21 + elapsed * 0.92 + phase * 0.75) *
+      Math.sin(windX * 0.21 + flowPhase * 0.92 + phase * 0.75) *
         (0.55 + wave * 0.48) +
-      Math.cos(baseZ * 0.18 + elapsed * 0.58 + phase) * 0.44;
+      Math.cos(baseZ * 0.18 + flowPhase * 0.58 + phase) * 0.44;
     field.positions[offset + 2] =
       baseZ +
-      Math.cos(baseX * 0.11 - elapsed * 0.42 + phase * 2.2) *
+      Math.cos(baseX * 0.11 - flowPhase * 0.42 + phase * 2.2) *
         (0.72 + sway * 0.82) +
       ribbon * 0.3 +
       shimmer;
 
     field.scales[index] =
       field.baseScales[index] *
-      (0.98 + Math.sin(elapsed * pulseSpeed + phase * 1.8) * pulseAmplitude);
+      (0.98 +
+        Math.sin(flowPhase * pulseSpeed + phase * 1.8) * pulseAmplitude);
 
     const pulse =
       0.84 +
-      Math.sin(elapsed * (0.76 + pulseSpeed * 0.28) + phase * 3.2) *
+      Math.sin(flowPhase * (0.76 + pulseSpeed * 0.28) + phase * 3.2) *
         (0.1 + pulseAmplitude * 0.55);
     const depthFade = 1.14 - Math.abs(field.positions[offset + 2]) / 24;
     alphaValues[index] =
@@ -294,11 +330,6 @@ function updateSandstormField(field: SandstormField, elapsed: number): void {
           (0.92 + field.baseScales[index] * 0.014),
       );
   }
-
-  field.points.position.y = -1.5 + Math.sin(elapsed * 0.16) * 0.4;
-  field.points.rotation.z = -0.06 + Math.sin(elapsed * 0.11) * 0.05;
-  field.points.rotation.x = -0.12 + Math.cos(elapsed * 0.1) * 0.03;
-
   field.positionAttribute.needsUpdate = true;
   field.alphaAttribute.needsUpdate = true;
   field.scaleAttribute.needsUpdate = true;
@@ -342,6 +373,10 @@ export function HeroSandstormBackground() {
           targetX: 0,
           targetY: 0,
         };
+        const scroll: ScrollState = {
+          current: window.scrollY,
+          target: window.scrollY,
+        };
 
         renderer = new THREE.WebGLRenderer({
           alpha: true,
@@ -356,12 +391,33 @@ export function HeroSandstormBackground() {
 
         container.appendChild(renderer.domElement);
 
-        let field = createSandstormField(
-          THREE,
+        const createLayers = (width: number) => {
+          const configs = [
+            { offsetY: -8, phaseShift: -0.35 },
+            { offsetY: 0, phaseShift: 0 },
+            { offsetY: 8, phaseShift: 0.35 },
+          ];
+
+          return configs.map<SandstormLayer>((config) => {
+            const field = createSandstormField(
+              THREE,
+              width,
+              reduceMotionQuery.matches,
+            );
+            field.points.position.set(0, config.offsetY, 0);
+            scene.add(field.points);
+
+            return {
+              field,
+              offsetY: config.offsetY,
+              phaseShift: config.phaseShift,
+            };
+          });
+        };
+
+        let layers = createLayers(
           container.clientWidth || window.innerWidth,
-          reduceMotionQuery.matches,
         );
-        scene.add(field.points);
 
         const resize = () => {
           const width = Math.max(container.clientWidth, window.innerWidth, 1);
@@ -380,15 +436,12 @@ export function HeroSandstormBackground() {
           );
           renderer?.setSize(width, height, false);
 
-          if (field.positions.length / 3 !== particleCount) {
-            scene.remove(field.points);
-            disposeSandstormField(field);
-            field = createSandstormField(
-              THREE,
-              width,
-              reduceMotionQuery.matches,
-            );
-            scene.add(field.points);
+          if (layers[0] && layers[0].field.positions.length / 3 !== particleCount) {
+            for (const layer of layers) {
+              scene.remove(layer.field.points);
+              disposeSandstormField(layer.field);
+            }
+            layers = createLayers(width);
           }
         };
 
@@ -409,13 +462,16 @@ export function HeroSandstormBackground() {
         const updateGlow = () => {
           const x = 50 + pointer.currentX * 18;
           const y = 40 + pointer.currentY * 18;
-          const opacity =
-            0.18 + Math.min(0.16, Math.hypot(pointer.currentX, pointer.currentY) * 0.1);
+          const pointerDistance = Math.hypot(
+            pointer.currentX,
+            pointer.currentY,
+          );
+          const opacity = Math.min(0.16, pointerDistance * 0.18);
 
           glow.style.opacity = opacity.toFixed(3);
           glow.style.background = [
-            `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.13), rgba(255,255,255,0.06) 16%, rgba(255,255,255,0.02) 30%, transparent 54%)`,
-            `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.05), transparent 40%)`,
+            `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.12), rgba(255,255,255,0.05) 14%, rgba(255,255,255,0.018) 28%, transparent 52%)`,
+            `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.035), transparent 38%)`,
           ].join(",");
         };
 
@@ -431,15 +487,21 @@ export function HeroSandstormBackground() {
           pointer.targetY = 0;
         };
 
+        const handleScroll = () => {
+          scroll.target = window.scrollY;
+        };
+
         window.addEventListener("pointermove", handlePointerMove, {
           passive: true,
         });
         window.addEventListener("pointerleave", handlePointerLeave, {
           passive: true,
         });
+        window.addEventListener("scroll", handleScroll, { passive: true });
         cleanupPointerTracking = () => {
           window.removeEventListener("pointermove", handlePointerMove);
           window.removeEventListener("pointerleave", handlePointerLeave);
+          window.removeEventListener("scroll", handleScroll);
         };
 
         const timer = new THREE.Timer();
@@ -450,17 +512,32 @@ export function HeroSandstormBackground() {
           const elapsed = timer.getElapsed();
           pointer.currentX += (pointer.targetX - pointer.currentX) * 0.045;
           pointer.currentY += (pointer.targetY - pointer.currentY) * 0.045;
+          scroll.current += (scroll.target - scroll.current) * 0.06;
+          const scrollPhase = scroll.current / Math.max(window.innerHeight, 1);
 
-          field.points.position.x = pointer.currentX * 1.45;
-          field.points.position.y =
-            -1.5 + Math.sin(elapsed * 0.16) * 0.4 - pointer.currentY * 1.2;
-          field.points.rotation.y = pointer.currentX * 0.16;
-          field.points.rotation.x =
-            -0.12 + Math.cos(elapsed * 0.1) * 0.03 - pointer.currentY * 0.08;
-          field.points.rotation.z =
-            -0.06 + Math.sin(elapsed * 0.11) * 0.05 + pointer.currentX * 0.05;
+          for (const layer of layers) {
+            layer.field.points.position.x = pointer.currentX * 0.2;
+            layer.field.points.position.y =
+              layer.offsetY +
+              Math.sin(elapsed * 0.16 + layer.phaseShift) * 0.16 -
+              pointer.currentY * 0.22;
+            layer.field.points.rotation.y =
+              pointer.currentX * 0.12 + layer.phaseShift * 0.08;
+            layer.field.points.rotation.x =
+              -0.08 +
+              Math.cos(elapsed * 0.1 + layer.phaseShift) * 0.02 +
+              pointer.currentY * 0.03;
+            layer.field.points.rotation.z =
+              -0.03 +
+              Math.sin(elapsed * 0.11 + layer.phaseShift) * 0.025 +
+              pointer.currentX * 0.02;
 
-          updateSandstormField(field, elapsed);
+            updateSandstormField(
+              layer.field,
+              elapsed + layer.phaseShift,
+              scrollPhase,
+            );
+          }
           updateGlow();
           renderer?.render(scene, camera);
         };
@@ -474,8 +551,10 @@ export function HeroSandstormBackground() {
         cleanupScene = () => {
           renderer?.setAnimationLoop(null);
           timer.dispose();
-          scene.remove(field.points);
-          disposeSandstormField(field);
+          for (const layer of layers) {
+            scene.remove(layer.field.points);
+            disposeSandstormField(layer.field);
+          }
         };
       } catch {
         cleanupResizeObserver = undefined;
@@ -503,7 +582,7 @@ export function HeroSandstormBackground() {
       />
       <div
         ref={glowRef}
-        className="absolute inset-[-18%] opacity-20 blur-3xl transition-opacity duration-300"
+        className="absolute inset-[-18%] opacity-0 blur-3xl transition-opacity duration-300 mix-blend-screen"
       />
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.28),rgba(0,0,0,0.1)_18%,rgba(0,0,0,0.18)_52%,rgba(0,0,0,0.32)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent_34%)]" />

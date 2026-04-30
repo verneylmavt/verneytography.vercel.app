@@ -27,10 +27,6 @@ export function HeroSection() {
       aria-label="Intro"
       className="relative isolate flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden bg-transparent py-16"
     >
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.4),rgba(0,0,0,0.06)_34%,rgba(0,0,0,0.16)_60%,rgba(0,0,0,0.34)_100%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-[-8rem] h-80 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.18),transparent_68%)] opacity-35 blur-3xl" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent via-black/26 to-black/46" />
-
       <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center">
         {site.hero.location ? (
           <p className="animate-[fadeUp_700ms_ease-out] text-sm text-muted">
