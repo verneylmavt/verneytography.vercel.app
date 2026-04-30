@@ -3,7 +3,6 @@ import type { LucideIcon } from "lucide-react";
 import { Camera, Link as LinkIcon, Mail } from "lucide-react";
 
 import { site } from "@/content/site";
-import { HeroSandstormBackground } from "@/components/hero-sandstorm-background";
 
 type HeroLink = {
   label: string;
@@ -26,12 +25,11 @@ export function HeroSection() {
     <section
       id="home"
       aria-label="Intro"
-      className="relative isolate flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden bg-black py-16"
+      className="relative isolate flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden bg-transparent py-16"
     >
-      <HeroSandstormBackground />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_34%),linear-gradient(to_bottom,rgba(0,0,0,0.68),rgba(0,0,0,0.14)_36%,rgba(0,0,0,0.5)_100%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-[-8rem] h-80 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.3),transparent_68%)] opacity-40 blur-3xl" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent via-black/40 to-black" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.4),rgba(0,0,0,0.06)_34%,rgba(0,0,0,0.16)_60%,rgba(0,0,0,0.34)_100%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-[-8rem] h-80 bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.18),transparent_68%)] opacity-35 blur-3xl" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-64 bg-gradient-to-b from-transparent via-black/26 to-black/46" />
 
       <div className="relative z-10 mx-auto w-full max-w-4xl px-6 text-center">
         {site.hero.location ? (

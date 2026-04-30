@@ -29,6 +29,13 @@ type SandstormField = {
   waveAmplitudes: Float32Array;
 };
 
+type PointerState = {
+  currentX: number;
+  currentY: number;
+  targetX: number;
+  targetY: number;
+};
+
 function randomBetween(min: number, max: number): number {
   return min + Math.random() * (max - min);
 }
@@ -304,15 +311,18 @@ function disposeSandstormField(field: SandstormField): void {
 
 export function HeroSandstormBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return undefined;
+    const glow = glowRef.current;
+    if (!container || !glow) return undefined;
 
     let disposed = false;
     let renderer: WebGLRenderer | null = null;
     let cleanupResizeObserver: (() => void) | undefined;
     let cleanupScene: (() => void) | undefined;
+    let cleanupPointerTracking: (() => void) | undefined;
 
     const setup = async () => {
       try {
@@ -326,6 +336,12 @@ export function HeroSandstormBackground() {
         const camera = new THREE.PerspectiveCamera(44, 1, 0.1, 100);
         camera.position.set(0, 0, 24);
         camera.lookAt(0, -1.5, 0);
+        const pointer: PointerState = {
+          currentX: 0,
+          currentY: 0,
+          targetX: 0,
+          targetY: 0,
+        };
 
         renderer = new THREE.WebGLRenderer({
           alpha: true,
@@ -386,8 +402,45 @@ export function HeroSandstormBackground() {
           cleanupResizeObserver = () => resizeObserver.disconnect();
         } else {
           window.addEventListener("resize", resize);
-          cleanupResizeObserver = () => window.removeEventListener("resize", resize);
+          cleanupResizeObserver = () =>
+            window.removeEventListener("resize", resize);
         }
+
+        const updateGlow = () => {
+          const x = 50 + pointer.currentX * 18;
+          const y = 40 + pointer.currentY * 18;
+          const opacity =
+            0.18 + Math.min(0.16, Math.hypot(pointer.currentX, pointer.currentY) * 0.1);
+
+          glow.style.opacity = opacity.toFixed(3);
+          glow.style.background = [
+            `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.13), rgba(255,255,255,0.06) 16%, rgba(255,255,255,0.02) 30%, transparent 54%)`,
+            `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.05), transparent 40%)`,
+          ].join(",");
+        };
+
+        const handlePointerMove = (event: PointerEvent) => {
+          const normalizedX = (event.clientX / window.innerWidth) * 2 - 1;
+          const normalizedY = (event.clientY / window.innerHeight) * 2 - 1;
+          pointer.targetX = normalizedX;
+          pointer.targetY = normalizedY;
+        };
+
+        const handlePointerLeave = () => {
+          pointer.targetX = 0;
+          pointer.targetY = 0;
+        };
+
+        window.addEventListener("pointermove", handlePointerMove, {
+          passive: true,
+        });
+        window.addEventListener("pointerleave", handlePointerLeave, {
+          passive: true,
+        });
+        cleanupPointerTracking = () => {
+          window.removeEventListener("pointermove", handlePointerMove);
+          window.removeEventListener("pointerleave", handlePointerLeave);
+        };
 
         const timer = new THREE.Timer();
         timer.connect(document);
@@ -395,7 +448,20 @@ export function HeroSandstormBackground() {
         const renderFrame = () => {
           timer.update();
           const elapsed = timer.getElapsed();
+          pointer.currentX += (pointer.targetX - pointer.currentX) * 0.045;
+          pointer.currentY += (pointer.targetY - pointer.currentY) * 0.045;
+
+          field.points.position.x = pointer.currentX * 1.45;
+          field.points.position.y =
+            -1.5 + Math.sin(elapsed * 0.16) * 0.4 - pointer.currentY * 1.2;
+          field.points.rotation.y = pointer.currentX * 0.16;
+          field.points.rotation.x =
+            -0.12 + Math.cos(elapsed * 0.1) * 0.03 - pointer.currentY * 0.08;
+          field.points.rotation.z =
+            -0.06 + Math.sin(elapsed * 0.11) * 0.05 + pointer.currentX * 0.05;
+
           updateSandstormField(field, elapsed);
+          updateGlow();
           renderer?.render(scene, camera);
         };
 
@@ -422,6 +488,7 @@ export function HeroSandstormBackground() {
     return () => {
       disposed = true;
       cleanupResizeObserver?.();
+      cleanupPointerTracking?.();
       cleanupScene?.();
       renderer?.dispose();
       renderer?.domElement.remove();
@@ -429,10 +496,18 @@ export function HeroSandstormBackground() {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      aria-hidden
-      className="pointer-events-none absolute inset-0"
-    />
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <div
+        ref={containerRef}
+        className="absolute inset-0"
+      />
+      <div
+        ref={glowRef}
+        className="absolute inset-[-18%] opacity-20 blur-3xl transition-opacity duration-300"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.28),rgba(0,0,0,0.1)_18%,rgba(0,0,0,0.18)_52%,rgba(0,0,0,0.32)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent_34%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,255,255,0.1),transparent_44%)] opacity-40" />
+    </div>
   );
 }
