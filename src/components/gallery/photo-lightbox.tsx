@@ -44,7 +44,7 @@ export function PhotoLightbox({
         <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(1100px,calc(100vw-2.25rem))] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-white/10 bg-black/55 shadow-2xl backdrop-blur-xl focus:outline-none data-[state=open]:animate-[zoomIn_220ms_ease-out] data-[state=closed]:animate-[zoomOut_180ms_ease-in]">
           {photo ? (
             <div className="flex max-h-[85svh] flex-col lg:flex-row">
-              <div className="relative flex max-h-[45svh] items-center justify-center bg-black p-4 sm:p-5 lg:max-h-none lg:flex-[1.2] lg:p-0">
+              <div className="relative flex max-h-[55svh] items-center justify-center bg-black p-4 sm:p-5 lg:max-h-none lg:flex-[1.2] lg:p-0">
                 <Image
                   src={photo.fullUrl}
                   alt={photo.description}
@@ -77,7 +77,8 @@ export function PhotoLightbox({
                   ) : null}
                 </div>
 
-                <div className="grid gap-3">
+                <div className="mt-8 border-t border-white/10 pt-6">
+                  <div className="grid gap-3">
                   <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
                     <span className="text-white/55">Camera</span>
                     <span className="min-w-0 break-words text-white/85">
@@ -120,6 +121,7 @@ export function PhotoLightbox({
                       {takenAt ?? "—"}
                     </span>
                   </div>
+                </div>
                 </div>
               </div>
             </div>

@@ -56,7 +56,7 @@ body {
 
 /* Liquid Glass button / pill treatment */
 .liquid-glass {
-  position: relative;
+  /* Visual-only: do not set layout properties like position. */
   overflow: hidden;
   background:
     linear-gradient(
