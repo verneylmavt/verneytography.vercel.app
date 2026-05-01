@@ -23,8 +23,9 @@ export function ScrollToTopOnReload() {
   useEffect(() => {
     if (!wasReloadNavigation()) return;
 
-    if (window.location.search || window.location.hash) {
-      window.history.replaceState(null, "", window.location.pathname);
+    const nextUrl = `${window.location.pathname}#home`;
+    if (window.location.search || window.location.hash !== "#home") {
+      window.history.replaceState(null, "", nextUrl);
     }
 
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
