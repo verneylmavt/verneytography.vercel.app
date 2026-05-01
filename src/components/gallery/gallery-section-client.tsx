@@ -55,23 +55,25 @@ function GalleryMasonry({
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 className="h-auto w-full select-none object-cover transition duration-500 group-hover:scale-[1.02]"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 opacity-0 transition duration-300 group-hover:opacity-100">
-                <p className="text-sm font-medium text-foreground">
-                  {photo.description}
-                </p>
-                {photo.tags.length > 0 ? (
-                  <div className="mt-2 flex flex-wrap gap-2">
-                    {photo.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center rounded-full border border-[rgb(var(--border)/0.12)] bg-[rgb(var(--surface)/0.40)] px-2.5 py-1 text-xs font-medium text-foreground/85"
-                      >
-                        {formatTag(tag)}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4 opacity-0 transition duration-300 group-hover:opacity-100 sm:p-5">
+                <div className="rounded-2xl bg-black/35 px-4 py-3 backdrop-blur-sm ring-1 ring-white/10">
+                  <p className="text-sm font-medium text-foreground drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">
+                    {photo.description}
+                  </p>
+                  {photo.tags.length > 0 ? (
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {photo.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center rounded-full border border-white/10 bg-black/20 px-2.5 py-1 text-xs font-medium text-white/85 drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]"
+                        >
+                          {formatTag(tag)}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </button>

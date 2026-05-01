@@ -116,7 +116,7 @@ export function PhotoLightbox({
                     </span>
                   </div>
                   <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                    <span className="text-white/55">Taken</span>
+                    <span className="text-white/55">Date</span>
                     <span className="min-w-0 break-words text-white/85">
                       {takenAt ?? "—"}
                     </span>
