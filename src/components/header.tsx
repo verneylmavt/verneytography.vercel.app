@@ -220,14 +220,18 @@ export function Header() {
         <div className="justify-self-end" aria-hidden />
       </div>
 
-      {mobileMenuOpen ? (
-        <div
-          ref={mobileMenuRef}
-          id="mobile-nav"
-          className="absolute left-0 right-0 top-full z-40 md:hidden"
-        >
-          <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="mt-3 max-h-[calc(100svh-4.5rem)] overflow-y-auto rounded-2xl border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.55)] p-2 shadow-2xl backdrop-blur-xl">
+      <div
+        ref={mobileMenuRef}
+        id="mobile-nav"
+        className={[
+          "md:hidden",
+          "grid transition-[grid-template-rows,opacity] duration-200 ease-out motion-reduce:transition-none",
+          mobileMenuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+        ].join(" ")}
+      >
+        <div className="overflow-hidden">
+          <div className="mx-auto w-full max-w-6xl px-4 pb-4 sm:px-6 lg:px-8">
+            <div className="rounded-2xl border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.55)] p-2 shadow-2xl backdrop-blur-xl">
               <div className="grid gap-1 p-1">
                 {sections.map((section) => {
                   const active = activeId === section.id;
@@ -255,7 +259,7 @@ export function Header() {
             </div>
           </div>
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }
