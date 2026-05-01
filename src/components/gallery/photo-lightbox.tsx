@@ -56,7 +56,7 @@ export function PhotoLightbox({
               </div>
 
               <div className="min-h-0 flex-1 overflow-y-auto border-t border-white/10 p-6 sm:p-8 lg:flex-[0.8] lg:border-l lg:border-t-0">
-                <div>
+                <div className="pr-14">
                   <Dialog.Title className="text-lg font-semibold tracking-tight text-white">
                     {photo.description}
                   </Dialog.Title>
