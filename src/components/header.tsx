@@ -155,7 +155,7 @@ export function Header() {
           <nav className="hidden items-center gap-1 md:flex" aria-label="Sections">
             <ul
               ref={navRef}
-              className="relative flex items-center gap-1 rounded-full border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.35)] p-1 backdrop-blur-md"
+              className="liquid-glass relative flex items-center gap-1 rounded-full p-1"
             >
               <span
                 aria-hidden
@@ -200,10 +200,8 @@ export function Header() {
             type="button"
             onClick={() => setMobileMenuOpen((value) => !value)}
             className={[
-              "inline-flex h-10 w-10 items-center justify-center rounded-full border border-[rgb(var(--border)/0.14)] md:hidden",
-              "bg-[rgb(var(--background)/0.35)] text-foreground/90 backdrop-blur-md transition",
-              "hover:border-[rgb(var(--border)/0.22)] hover:bg-[rgb(var(--background)/0.55)] hover:text-foreground",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              "liquid-glass inline-flex h-10 w-10 items-center justify-center rounded-full md:hidden transition",
+              "text-foreground/90 hover:text-foreground",
             ].join(" ")}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
@@ -231,7 +229,7 @@ export function Header() {
       >
         <div className="overflow-hidden">
           <div className="mx-auto w-full max-w-6xl px-4 pb-4 sm:px-6 lg:px-8">
-            <div className="rounded-2xl border border-[rgb(var(--border)/0.14)] bg-[rgb(var(--background)/0.55)] p-2 shadow-2xl backdrop-blur-xl">
+            <div className="liquid-glass rounded-2xl p-2">
               <div className="grid gap-1 p-1">
                 {sections.map((section) => {
                   const active = activeId === section.id;
@@ -243,11 +241,10 @@ export function Header() {
                       onClick={() => setMobileMenuOpen(false)}
                       aria-current={active ? "page" : undefined}
                       className={[
-                        "flex items-center justify-between rounded-xl border px-4 py-3 text-sm transition-colors",
+                        "liquid-glass flex items-center justify-between rounded-xl px-4 py-3 text-sm transition-colors",
                         active
-                          ? "border-[rgb(var(--border)/0.20)] bg-[rgb(var(--foreground)/0.08)] text-foreground"
-                          : "border-[rgb(var(--border)/0.12)] bg-[rgb(var(--surface)/0.20)] text-foreground/85 hover:border-[rgb(var(--border)/0.18)] hover:bg-[rgb(var(--surface)/0.30)]",
-                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                          ? "liquid-glass--active text-foreground"
+                          : "text-foreground/85 hover:text-foreground",
                       ].join(" ")}
                     >
                       <span>{section.label}</span>

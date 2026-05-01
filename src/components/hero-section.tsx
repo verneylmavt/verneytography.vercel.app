@@ -56,10 +56,8 @@ export function HeroSection() {
                 target={target}
                 rel={rel}
                 className={[
-                  "group inline-flex items-center gap-2 rounded-full border border-[rgb(var(--border)/0.14)] px-4 py-2 text-sm",
-                  "bg-[rgb(var(--background)/0.4)] backdrop-blur-md transition",
-                  "hover:border-[rgb(var(--border)/0.22)] hover:bg-[rgb(var(--background)/0.55)]",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                  "liquid-glass group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition",
+                  "text-foreground/90 hover:text-foreground",
                 ].join(" ")}
               >
                 <Icon aria-hidden className="h-4 w-4 text-foreground/85" />

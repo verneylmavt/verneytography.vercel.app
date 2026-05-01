@@ -46,7 +46,7 @@ function GalleryMasonry({
             onClick={() => onSelectPhoto(photo.id)}
             className="group mb-5 block w-full break-inside-avoid text-left focus-visible:outline-none"
           >
-            <div className="relative overflow-hidden rounded-3xl border border-[rgb(var(--border)/0.10)] bg-[rgb(var(--background)/0.35)] shadow-[0_25px_80px_-50px_rgba(0,0,0,0.9)] backdrop-blur-md transition hover:border-[rgb(var(--border)/0.18)] hover:bg-[rgb(var(--background)/0.45)]">
+            <div className="liquid-glass relative overflow-hidden rounded-3xl shadow-[0_25px_80px_-50px_rgba(0,0,0,0.9)] transition">
               <Image
                 src={photo.thumbUrl}
                 alt={photo.description}
@@ -88,10 +88,8 @@ function GalleryMasonry({
               )
             }
             className={[
-              "inline-flex items-center justify-center rounded-full border border-[rgb(var(--border)/0.14)] px-5 py-2.5 text-sm",
-              "bg-[rgb(var(--background)/0.40)] text-foreground/90 backdrop-blur-md transition",
-              "hover:border-[rgb(var(--border)/0.22)] hover:bg-[rgb(var(--background)/0.55)] hover:text-foreground",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              "liquid-glass inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm transition",
+              "text-foreground/90 hover:text-foreground",
             ].join(" ")}
           >
             Load more
@@ -187,11 +185,8 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
           onClick={() => setTag(null)}
           aria-pressed={!selectedTag}
           className={[
-            "whitespace-nowrap rounded-full border px-3 py-1.5 text-xs transition",
-            !selectedTag
-              ? "border-[rgb(var(--border)/0.20)] bg-[rgb(var(--foreground)/0.08)] text-foreground"
-              : "border-[rgb(var(--border)/0.12)] bg-[rgb(var(--surface)/0.40)] text-foreground/85 hover:border-[rgb(var(--border)/0.18)]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+            "liquid-glass whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
+            !selectedTag ? "liquid-glass--active text-foreground" : "text-foreground/85 hover:text-foreground",
           ].join(" ")}
         >
           All
@@ -205,11 +200,8 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
               onClick={() => setTag(tag)}
               aria-pressed={active}
               className={[
-                "whitespace-nowrap rounded-full border px-3 py-1.5 text-xs transition",
-                active
-                  ? "border-[rgb(var(--border)/0.20)] bg-[rgb(var(--foreground)/0.08)] text-foreground"
-                  : "border-[rgb(var(--border)/0.12)] bg-[rgb(var(--surface)/0.40)] text-foreground/85 hover:border-[rgb(var(--border)/0.18)]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+                "liquid-glass whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
+                active ? "liquid-glass--active text-foreground" : "text-foreground/85 hover:text-foreground",
               ].join(" ")}
             >
               {formatTag(tag)}
@@ -225,10 +217,8 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
             type="button"
             onClick={() => setTag(null)}
             className={[
-              "mt-5 inline-flex items-center justify-center rounded-full border border-[rgb(var(--border)/0.14)] px-4 py-2 text-xs",
-              "bg-[rgb(var(--background)/0.40)] text-foreground/90 backdrop-blur-md transition",
-              "hover:border-[rgb(var(--border)/0.22)] hover:bg-[rgb(var(--background)/0.55)] hover:text-foreground",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+              "liquid-glass mt-5 inline-flex items-center justify-center rounded-full px-4 py-2 text-xs transition",
+              "text-foreground/90 hover:text-foreground",
             ].join(" ")}
           >
             Clear filter

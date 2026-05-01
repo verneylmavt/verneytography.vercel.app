@@ -125,7 +125,7 @@ export function PhotoLightbox({
             </div>
           ) : null}
 
-          <Dialog.Close className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-sm text-white/80 backdrop-blur transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30">
+          <Dialog.Close className="liquid-glass absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full text-sm text-white/85 transition hover:text-white">
             <span className="sr-only">Close</span>
             <span aria-hidden>✕</span>
           </Dialog.Close>
