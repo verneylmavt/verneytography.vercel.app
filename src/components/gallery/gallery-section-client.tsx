@@ -185,7 +185,7 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
           onClick={() => setTag(null)}
           aria-pressed={!selectedTag}
           className={[
-            "liquid-glass whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
+            "liquid-glass shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
             !selectedTag ? "liquid-glass--active text-foreground" : "text-foreground/85 hover:text-foreground",
           ].join(" ")}
         >
@@ -200,7 +200,7 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
               onClick={() => setTag(tag)}
               aria-pressed={active}
               className={[
-                "liquid-glass whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
+                "liquid-glass shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
                 active ? "liquid-glass--active text-foreground" : "text-foreground/85 hover:text-foreground",
               ].join(" ")}
             >
