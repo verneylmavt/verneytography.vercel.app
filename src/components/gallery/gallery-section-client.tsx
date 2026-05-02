@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import type { Photo } from "@/lib/types";
@@ -19,10 +19,34 @@ function formatTag(tag: string): string {
     .join(" ");
 }
 
-function buildUrl(pathname: string, searchParams: URLSearchParams): string {
+function buildUrl(
+  pathname: string,
+  searchParams: URLSearchParams,
+  hash = "",
+): string {
   const query = searchParams.toString();
-  if (!query) return pathname;
-  return `${pathname}?${query}`;
+  const url = query ? `${pathname}?${query}` : pathname;
+  return `${url}${hash}`;
+}
+
+function getCurrentSearchParams(): URLSearchParams {
+  return new URLSearchParams(window.location.search);
+}
+
+function replaceGalleryUrl(pathname: string, searchParams: URLSearchParams) {
+  window.history.replaceState(
+    null,
+    "",
+    buildUrl(pathname, searchParams, window.location.hash),
+  );
+}
+
+function pushGalleryUrl(pathname: string, searchParams: URLSearchParams) {
+  window.history.pushState(
+    null,
+    "",
+    buildUrl(pathname, searchParams, window.location.hash),
+  );
 }
 
 function GalleryMasonry({
@@ -103,7 +127,6 @@ function GalleryMasonry({
 }
 
 export function GallerySectionClient({ photos }: { photos: Photo[] }) {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -146,37 +169,41 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
     const next = new URLSearchParams(searchParams.toString());
     next.delete("photo");
     openedViaClickRef.current = false;
-    router.replace(buildUrl(pathname, next), { scroll: false });
-  }, [pathname, router, searchParams, selectedPhoto, selectedPhotoId]);
+    replaceGalleryUrl(pathname, next);
+  }, [pathname, searchParams, selectedPhoto, selectedPhotoId]);
+
+  useEffect(() => {
+    if (!selectedPhotoId) openedViaClickRef.current = false;
+  }, [selectedPhotoId]);
 
   function setTag(tag: string | null) {
-    const next = new URLSearchParams(searchParams.toString());
+    const next = getCurrentSearchParams();
     if (!tag) next.delete("tag");
     else next.set("tag", tag);
     next.delete("photo");
     openedViaClickRef.current = false;
-    router.replace(buildUrl(pathname, next), { scroll: false });
+    replaceGalleryUrl(pathname, next);
   }
 
   function openPhoto(id: string) {
-    const next = new URLSearchParams(searchParams.toString());
+    const next = getCurrentSearchParams();
     next.set("photo", id);
     openedViaClickRef.current = true;
-    router.push(buildUrl(pathname, next), { scroll: false });
+    pushGalleryUrl(pathname, next);
   }
 
   function closePhoto() {
-    const next = new URLSearchParams(searchParams.toString());
+    const next = getCurrentSearchParams();
     next.delete("photo");
 
     if (openedViaClickRef.current && window.history.length > 1) {
       openedViaClickRef.current = false;
-      router.back();
+      window.history.back();
       return;
     }
 
     openedViaClickRef.current = false;
-    router.replace(buildUrl(pathname, next), { scroll: false });
+    replaceGalleryUrl(pathname, next);
   }
 
   return (

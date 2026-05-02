@@ -340,6 +340,18 @@ function disposeSandstormField(field: SandstormField): void {
   field.points.material.dispose();
 }
 
+function canCreateWebGlContext(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    const context =
+      canvas.getContext("webgl2") ?? canvas.getContext("webgl");
+    context?.getExtension("WEBGL_lose_context")?.loseContext();
+    return Boolean(context);
+  } catch {
+    return false;
+  }
+}
+
 export function HeroSandstormBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
@@ -357,6 +369,8 @@ export function HeroSandstormBackground() {
 
     const setup = async () => {
       try {
+        if (!canCreateWebGlContext()) return;
+
         const THREE = await import("three");
         if (disposed || !container.isConnected) return;
 
