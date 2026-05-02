@@ -108,6 +108,24 @@
     }
   },
   {
+    "id": "7",
+    "thumbUrl": "/demo/7.jpg",
+    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/7_X.jpg",
+    "width": 4894,
+    "height": 3370,
+    "description": "Blindfolded student navigating the world of playful chaos.",
+    "tags": ["street", "school", "student"],
+    "exif": {
+      "camera": "Sony A7 II",
+      "lens": "FE 28-70mm F/3.5-5.6",
+      "focalLength": "38mm",
+      "aperture": "F/4.5",
+      "shutterSpeed": "1/640",
+      "iso": 400,
+      "takenAt": "2019-07-16T10:03:00+07:00"
+    }
+  },
+  {
     "id": "10",
     "thumbUrl": "/demo/10.jpg",
     "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/10_X.jpg",
@@ -123,6 +141,24 @@
       "shutterSpeed": "1/160",
       "iso": 5000,
       "takenAt": "2019-04-25T20:30:00+07:00"
+    }
+  },
+  {
+    "id": "11",
+    "thumbUrl": "/demo/11.jpg",
+    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/11_X.jpg",
+    "width": 4869,
+    "height": 3246,
+    "description": "Torches blazing, a solemn procession of youth.",
+    "tags": ["street", "school", "student"],
+    "exif": {
+      "camera": "Sony A7 II",
+      "lens": "FE 50mm F/1.8",
+      "focalLength": "50mm",
+      "aperture": "F/1.8",
+      "shutterSpeed": "1/100",
+      "iso": 4000,
+      "takenAt": "2019-07-18T18:02:00+07:00"
     }
   }
 ]
