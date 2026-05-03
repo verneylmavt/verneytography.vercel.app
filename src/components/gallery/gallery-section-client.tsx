@@ -114,8 +114,9 @@ function GalleryMasonry({
               )
             }
             className={[
-              "liquid-glass inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm transition",
+              "liquid-glass liquid-glass--premium inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm transition",
               "text-foreground/90 hover:text-foreground",
+              "transform-gpu hover:-translate-y-0.5 motion-reduce:transform-none",
             ].join(" ")}
           >
             Load more
@@ -214,7 +215,7 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
           onClick={() => setTag(null)}
           aria-pressed={!selectedTag}
           className={[
-            "liquid-glass shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
+            "liquid-glass liquid-glass--premium shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
             !selectedTag ? "liquid-glass--active text-foreground" : "text-foreground/85 hover:text-foreground",
           ].join(" ")}
         >
@@ -229,7 +230,7 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
               onClick={() => setTag(tag)}
               aria-pressed={active}
               className={[
-                "liquid-glass shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
+                "liquid-glass liquid-glass--premium shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
                 active ? "liquid-glass--active text-foreground" : "text-foreground/85 hover:text-foreground",
               ].join(" ")}
             >
@@ -246,8 +247,9 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
             type="button"
             onClick={() => setTag(null)}
             className={[
-              "liquid-glass mt-5 inline-flex items-center justify-center rounded-full px-4 py-2 text-xs transition",
+              "liquid-glass liquid-glass--premium mt-5 inline-flex items-center justify-center rounded-full px-4 py-2 text-xs transition",
               "text-foreground/90 hover:text-foreground",
+              "transform-gpu hover:-translate-y-0.5 motion-reduce:transform-none",
             ].join(" ")}
           >
             Clear filter

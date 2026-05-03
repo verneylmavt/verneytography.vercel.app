@@ -1,5 +1,6 @@
 export const site = {
   brand: "verneytography",
+  personalWebsiteUrl: "https://verneylmavt.com/",
   hero: {
     location: "Jakarta, Indonesia",
     name: "Elvern Neylmav Tanny",

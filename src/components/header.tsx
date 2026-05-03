@@ -201,8 +201,9 @@ export function Header() {
             type="button"
             onClick={() => setMobileMenuOpen((value) => !value)}
             className={[
-              "liquid-glass inline-flex h-10 w-10 items-center justify-center rounded-full md:hidden transition",
+              "liquid-glass liquid-glass--premium inline-flex h-10 w-10 items-center justify-center rounded-full md:hidden transition",
               "text-foreground/90 hover:text-foreground",
+              "transform-gpu hover:-translate-y-0.5 motion-reduce:transform-none",
             ].join(" ")}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
@@ -244,7 +245,7 @@ export function Header() {
                       onClick={() => setMobileMenuOpen(false)}
                       aria-current={active ? "page" : undefined}
                       className={[
-                        "liquid-glass flex items-center justify-between rounded-xl px-4 py-3 text-sm transition-colors",
+                        "liquid-glass liquid-glass--premium flex items-center justify-between rounded-xl px-4 py-3 text-sm transition-colors",
                         active
                           ? "liquid-glass--active text-foreground"
                           : "text-foreground/85 hover:text-foreground",

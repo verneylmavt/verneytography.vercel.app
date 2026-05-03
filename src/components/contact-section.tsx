@@ -48,11 +48,14 @@ export function ContactSection() {
               target={target}
               rel={rel}
               className={[
-                "liquid-glass group inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm transition",
+                "liquid-glass liquid-glass--premium group inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm transition",
                 "text-foreground/90 hover:text-foreground",
               ].join(" ")}
             >
-              <Icon aria-hidden className="h-4 w-4 text-foreground/85" />
+              <Icon
+                aria-hidden
+                className="h-4 w-4 text-foreground/85 transition duration-200 motion-reduce:transition-none"
+              />
               <span className="text-foreground/90">{link.label}</span>
             </Link>
           );

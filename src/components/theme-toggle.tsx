@@ -67,7 +67,7 @@ export function ThemeToggle() {
         setTheme(next);
       }}
       className={[
-        "liquid-glass inline-flex h-10 w-10 items-center justify-center rounded-full transition",
+        "liquid-glass liquid-glass--premium inline-flex h-10 w-10 items-center justify-center rounded-full transition",
         "text-foreground/90 hover:text-foreground",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
       ].join(" ")}

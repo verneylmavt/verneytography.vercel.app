@@ -234,6 +234,61 @@ html[data-theme="light"] .hero-topo-canvas {
   transform: translateZ(0);
 }
 
+.liquid-glass--premium {
+  position: relative;
+  isolation: isolate;
+}
+
+.liquid-glass--premium::before,
+.liquid-glass--premium::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.liquid-glass--premium::before {
+  opacity: 0;
+  background: radial-gradient(
+    80% 120% at 15% 0%,
+    rgb(var(--accent) / 0.22),
+    transparent 60%
+  );
+  transition: opacity 500ms ease;
+}
+
+.liquid-glass--premium::after {
+  inset: 0 auto 0 0;
+  width: 34%;
+  opacity: 0;
+  filter: blur(18px);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-140%) skewX(-12deg);
+  transition:
+    transform 700ms ease,
+    opacity 420ms ease;
+}
+
+.liquid-glass--premium:hover::before {
+  opacity: 1;
+}
+
+.liquid-glass--premium:hover::after {
+  opacity: 1;
+  transform: translateX(360%) skewX(-12deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass--premium::after {
+    display: none;
+  }
+  .liquid-glass--premium::before {
+    transition: none;
+  }
+}
+
 .liquid-glass:hover {
   border-color: var(--glass-border-hover);
   background:
