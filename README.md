@@ -31,3 +31,6 @@ npm run photos:sync
 ```
 
 Re-running the script updates URLs/dimensions/EXIF while preserving existing `description` and `tags` edits per photo. -->
+
+![verneytography.vercel.app (Light Mode)](https://raw.githubusercontent.com/verneylmavt/verneytography.vercel.app/refs/heads/main/public/demo-light.png)
+![verneytography.vercel.app (Dark Mode)](https://raw.githubusercontent.com/verneylmavt/verneytography.vercel.app/refs/heads/main/public/demo-dark.png)
