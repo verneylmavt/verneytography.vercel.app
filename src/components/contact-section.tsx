@@ -60,7 +60,7 @@ export function ContactSection() {
       </div>
 
       <footer className="mt-16 pb-10 text-sm text-muted">
-        <p>©verneytography. Inspired by https://verneylmavt.com/.</p>
+        <p>©verneytography. Inspired by contour lines.</p>
       </footer>
     </section>
   );
