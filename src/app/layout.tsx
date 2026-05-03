@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Newsreader } from "next/font/google";
 import "./globals.css";
 
 import { site } from "@/content/site";
-import { HeroSandstormBackground } from "@/components/hero-sandstorm-background";
+import { HeroTopographicBackground } from "@/components/hero-topographic-background";
 import { ScrollToTopOnReload } from "@/components/scroll-to-top-on-reload";
 
 const geistSans = Geist({
@@ -37,7 +37,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground font-sans selection:bg-foreground/10 selection:text-foreground">
-        <HeroSandstormBackground />
+        <HeroTopographicBackground />
         <ScrollToTopOnReload />
         {children}
       </body>
