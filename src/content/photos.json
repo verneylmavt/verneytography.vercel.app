@@ -6,7 +6,7 @@
     "width": 5567,
     "height": 3882,
     "description": "Joyful chorus of students moving in perfect harmony.",
-    "tags": ["street", "school", "student"],
+    "tags": ["journalism", "school", "student"],
     "exif": {
       "camera": "Sony A7 II",
       "lens": "FE 50mm F/1.8",
@@ -114,7 +114,7 @@
     "width": 4894,
     "height": 3370,
     "description": "Blindfolded student navigating the world of playful chaos.",
-    "tags": ["street", "school", "student"],
+    "tags": ["journalism", "school", "student"],
     "exif": {
       "camera": "Sony A7 II",
       "lens": "FE 28-70mm F/3.5-5.6",
@@ -129,18 +129,18 @@
     "id": "8",
     "thumbUrl": "/demo/8.jpg",
     "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/8_X.jpg",
-    "width": 3757,
-    "height": 2501,
-    "description": "A child gathering the night in a billow of crimson cloth.",
-    "tags": ["street", "child", "night"],
+    "width": 4869,
+    "height": 3246,
+    "description": "Torches blazing, a solemn procession of youth.",
+    "tags": ["journalism", "school", "student"],
     "exif": {
       "camera": "Sony A7 II",
       "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
-      "shutterSpeed": "1/160",
-      "iso": 5000,
-      "takenAt": "2019-04-25T20:30:00+07:00"
+      "shutterSpeed": "1/100",
+      "iso": 4000,
+      "takenAt": "2019-07-18T18:02:00+07:00"
     }
   }
 ]
