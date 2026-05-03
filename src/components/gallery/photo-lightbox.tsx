@@ -41,10 +41,10 @@ export function PhotoLightbox({
     >
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm data-[state=open]:animate-[fadeIn_220ms_ease-out] data-[state=closed]:animate-[fadeOut_180ms_ease-in]" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(1100px,calc(100vw-2.25rem))] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-white/10 bg-black/55 shadow-2xl backdrop-blur-xl focus:outline-none data-[state=open]:animate-[zoomIn_220ms_ease-out] data-[state=closed]:animate-[zoomOut_180ms_ease-in]">
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(1100px,calc(100vw-2.25rem))] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-border/10 bg-background/[0.65] shadow-2xl backdrop-blur-xl focus:outline-none data-[state=open]:animate-[zoomIn_220ms_ease-out] data-[state=closed]:animate-[zoomOut_180ms_ease-in]">
           {photo ? (
             <div className="flex max-h-[85svh] flex-col lg:flex-row">
-              <div className="relative flex max-h-[55svh] items-center justify-center bg-black p-4 sm:p-5 lg:max-h-none lg:flex-[1.2] lg:p-0">
+              <div className="relative flex max-h-[55svh] items-center justify-center bg-[rgb(var(--foreground)/0.04)] p-4 sm:p-5 lg:max-h-none lg:flex-[1.2] lg:p-0">
                 <Image
                   src={photo.fullUrl}
                   alt={photo.description}
@@ -55,9 +55,9 @@ export function PhotoLightbox({
                 />
               </div>
 
-              <div className="min-h-0 flex-1 overflow-y-auto border-t border-white/10 p-6 sm:p-8 lg:flex-[0.8] lg:border-l lg:border-t-0">
+              <div className="min-h-0 flex-1 overflow-y-auto border-t border-border/10 p-6 sm:p-8 lg:flex-[0.8] lg:border-l lg:border-t-0">
                 <div className="pr-14">
-                  <Dialog.Title className="text-lg font-semibold tracking-tight text-white">
+                  <Dialog.Title className="text-lg font-semibold tracking-tight text-foreground">
                     {photo.description}
                   </Dialog.Title>
                   <Dialog.Description className="sr-only">
@@ -68,7 +68,7 @@ export function PhotoLightbox({
                       {photo.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-white/75"
+                          className="liquid-glass inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium text-foreground/80"
                         >
                           {formatTag(tag)}
                         </span>
@@ -77,57 +77,57 @@ export function PhotoLightbox({
                   ) : null}
                 </div>
 
-                <div className="mt-8 border-t border-white/10 pt-6">
+                <div className="mt-8 border-t border-border/10 pt-6">
                   <div className="grid gap-3">
-                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                    <span className="text-white/55">Camera</span>
-                    <span className="min-w-0 break-words text-white/85">
-                      {photo.exif?.camera ?? "—"}
-                    </span>
+                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
+                      <span className="text-muted">Camera</span>
+                      <span className="min-w-0 break-words text-foreground/90">
+                        {photo.exif?.camera ?? "—"}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
+                      <span className="text-muted">Lens</span>
+                      <span className="min-w-0 break-words text-foreground/90">
+                        {photo.exif?.lens ?? "—"}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
+                      <span className="text-muted">Focal length</span>
+                      <span className="min-w-0 break-words text-foreground/90">
+                        {photo.exif?.focalLength ?? "—"}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
+                      <span className="text-muted">Aperture</span>
+                      <span className="min-w-0 break-words text-foreground/90">
+                        {photo.exif?.aperture ?? "—"}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
+                      <span className="text-muted">Shutter</span>
+                      <span className="min-w-0 break-words text-foreground/90">
+                        {photo.exif?.shutterSpeed ?? "—"}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
+                      <span className="text-muted">ISO</span>
+                      <span className="min-w-0 break-words text-foreground/90">
+                        {photo.exif?.iso ?? "—"}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
+                      <span className="text-muted">Date</span>
+                      <span className="min-w-0 break-words text-foreground/90">
+                        {takenAt ?? "—"}
+                      </span>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                    <span className="text-white/55">Lens</span>
-                    <span className="min-w-0 break-words text-white/85">
-                      {photo.exif?.lens ?? "—"}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                    <span className="text-white/55">Focal length</span>
-                    <span className="min-w-0 break-words text-white/85">
-                      {photo.exif?.focalLength ?? "—"}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                    <span className="text-white/55">Aperture</span>
-                    <span className="min-w-0 break-words text-white/85">
-                      {photo.exif?.aperture ?? "—"}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                    <span className="text-white/55">Shutter</span>
-                    <span className="min-w-0 break-words text-white/85">
-                      {photo.exif?.shutterSpeed ?? "—"}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                    <span className="text-white/55">ISO</span>
-                    <span className="min-w-0 break-words text-white/85">
-                      {photo.exif?.iso ?? "—"}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                    <span className="text-white/55">Date</span>
-                    <span className="min-w-0 break-words text-white/85">
-                      {takenAt ?? "—"}
-                    </span>
-                  </div>
-                </div>
                 </div>
               </div>
             </div>
           ) : null}
 
-          <Dialog.Close className="liquid-glass absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full text-sm text-white/85 transition hover:text-white">
+          <Dialog.Close className="liquid-glass absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full text-sm text-foreground/85 transition hover:text-foreground">
             <span className="sr-only">Close</span>
             <span aria-hidden>✕</span>
           </Dialog.Close>
@@ -136,4 +136,3 @@ export function PhotoLightbox({
     </Dialog.Root>
   );
 }
-

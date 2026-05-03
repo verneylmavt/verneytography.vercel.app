@@ -1,7 +1,126 @@
 @import "tailwindcss";
 
 :root {
-  /* Dark-only theme tokens */
+  /* Light theme tokens (default) */
+  --background: 248 249 251;
+  --foreground: 15 15 18;
+  --muted: 92 92 104;
+  --border: 0 0 0;
+  --surface: 255 255 255;
+  --accent: 45 125 255;
+  --noise-opacity: 0.03;
+  --vignette-opacity: 0.22;
+  --vignette-mid: rgba(0, 0, 0, 0.12);
+  --vignette-outer: rgba(0, 0, 0, 0.26);
+
+  /* "Clear" glass defaults (avoid milky tint) */
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-hover: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.09);
+  --glass-border-hover: rgba(0, 0, 0, 0.14);
+  --glass-shadow: 0 22px 80px -55px rgba(0, 0, 0, 0.28);
+  --glass-shadow-press: 0 16px 50px -45px rgba(0, 0, 0, 0.34);
+
+  /* Hero topo overlays */
+  --hero-topo-linear: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.78),
+    rgba(255, 255, 255, 0.28) 18%,
+    rgba(255, 255, 255, 0.46) 52%,
+    rgba(255, 255, 255, 0.82) 100%
+  );
+  --hero-topo-radial-top: radial-gradient(
+    circle at top,
+    rgba(0, 0, 0, 0.05),
+    transparent 34%
+  );
+  --hero-topo-radial-bottom: radial-gradient(
+    ellipse at bottom,
+    rgba(0, 0, 0, 0.06),
+    transparent 44%
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark theme tokens (system preference) */
+    --background: 0 0 0;
+    --foreground: 244 244 245;
+    --muted: 156 156 168;
+    --border: 255 255 255;
+    --surface: 14 14 18;
+    --accent: 120 180 255;
+    --noise-opacity: 0.045;
+    --vignette-opacity: 0.6;
+    --vignette-mid: rgba(0, 0, 0, 0.45);
+    --vignette-outer: rgba(0, 0, 0, 0.75);
+
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-bg-hover: rgba(255, 255, 255, 0.045);
+    --glass-border: rgba(255, 255, 255, 0.16);
+    --glass-border-hover: rgba(255, 255, 255, 0.26);
+    --glass-shadow: 0 22px 80px -55px rgba(0, 0, 0, 0.85);
+    --glass-shadow-press: 0 16px 50px -45px rgba(0, 0, 0, 0.9);
+
+    --hero-topo-linear: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.12) 18%,
+      rgba(0, 0, 0, 0.2) 52%,
+      rgba(0, 0, 0, 0.34) 100%
+    );
+    --hero-topo-radial-top: radial-gradient(
+      circle at top,
+      rgba(255, 255, 255, 0.05),
+      transparent 34%
+    );
+    --hero-topo-radial-bottom: radial-gradient(
+      ellipse at bottom,
+      rgba(255, 255, 255, 0.1),
+      transparent 44%
+    );
+  }
+}
+
+html[data-theme="light"] {
+  --background: 248 249 251;
+  --foreground: 15 15 18;
+  --muted: 92 92 104;
+  --border: 0 0 0;
+  --surface: 255 255 255;
+  --accent: 45 125 255;
+  --noise-opacity: 0.03;
+  --vignette-opacity: 0.22;
+  --vignette-mid: rgba(0, 0, 0, 0.12);
+  --vignette-outer: rgba(0, 0, 0, 0.26);
+
+  --glass-bg: rgba(255, 255, 255, 0.62);
+  --glass-bg-hover: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.09);
+  --glass-border-hover: rgba(0, 0, 0, 0.14);
+  --glass-shadow: 0 22px 80px -55px rgba(0, 0, 0, 0.28);
+  --glass-shadow-press: 0 16px 50px -45px rgba(0, 0, 0, 0.34);
+
+  --hero-topo-linear: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.78),
+    rgba(255, 255, 255, 0.28) 18%,
+    rgba(255, 255, 255, 0.46) 52%,
+    rgba(255, 255, 255, 0.82) 100%
+  );
+  --hero-topo-radial-top: radial-gradient(
+    circle at top,
+    rgba(0, 0, 0, 0.05),
+    transparent 34%
+  );
+  --hero-topo-radial-bottom: radial-gradient(
+    ellipse at bottom,
+    rgba(0, 0, 0, 0.06),
+    transparent 44%
+  );
+}
+
+html[data-theme="dark"] {
   --background: 0 0 0;
   --foreground: 244 244 245;
   --muted: 156 156 168;
@@ -10,13 +129,33 @@
   --accent: 120 180 255;
   --noise-opacity: 0.045;
   --vignette-opacity: 0.6;
-  /* "Clear" glass defaults (avoid milky tint) */
+  --vignette-mid: rgba(0, 0, 0, 0.45);
+  --vignette-outer: rgba(0, 0, 0, 0.75);
+
   --glass-bg: rgba(255, 255, 255, 0.03);
   --glass-bg-hover: rgba(255, 255, 255, 0.045);
   --glass-border: rgba(255, 255, 255, 0.16);
   --glass-border-hover: rgba(255, 255, 255, 0.26);
   --glass-shadow: 0 22px 80px -55px rgba(0, 0, 0, 0.85);
   --glass-shadow-press: 0 16px 50px -45px rgba(0, 0, 0, 0.9);
+
+  --hero-topo-linear: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.12) 18%,
+    rgba(0, 0, 0, 0.2) 52%,
+    rgba(0, 0, 0, 0.34) 100%
+  );
+  --hero-topo-radial-top: radial-gradient(
+    circle at top,
+    rgba(255, 255, 255, 0.05),
+    transparent 34%
+  );
+  --hero-topo-radial-bottom: radial-gradient(
+    ellipse at bottom,
+    rgba(255, 255, 255, 0.1),
+    transparent 44%
+  );
 }
 
 @theme inline {
@@ -37,15 +176,37 @@ body {
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light dark;
   scroll-behavior: smooth;
 }
 
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 body {
-  background: rgb(var(--background));
+  background-color: rgb(var(--background));
   color: rgb(var(--foreground));
   font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system,
     Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html.theme-ready body {
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+/* Topographic background helpers */
+.hero-topo-canvas {
+  display: block;
+}
+
+html[data-theme="light"] .hero-topo-canvas {
+  filter: invert(1);
+  opacity: 0.9;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -86,14 +247,14 @@ body {
 }
 
 .liquid-glass--active {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--glass-border-hover);
   background: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0.12) 0%,
       rgba(255, 255, 255, 0.04) 42%,
       rgba(255, 255, 255, 0.02) 100%
     ),
-    rgba(255, 255, 255, 0.05);
+    var(--glass-bg-hover);
 }
 
 .liquid-glass:active {
@@ -103,8 +264,8 @@ body {
 .liquid-glass:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px rgba(120, 180, 255, 0.38),
-    0 0 0 4px rgba(0, 0, 0, 0.55),
+    0 0 0 2px rgb(var(--accent) / 0.38),
+    0 0 0 4px rgb(var(--background) / 0.55),
     var(--glass-shadow),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
@@ -115,7 +276,7 @@ body {
   .liquid-glass {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    background: rgba(18, 18, 22, 0.92);
+    background: rgb(var(--surface) / 0.92);
   }
   .liquid-glass::before,
   .liquid-glass::after {
@@ -146,8 +307,8 @@ body::after {
   background: radial-gradient(
     60% 50% at 50% 20%,
     rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.45) 70%,
-    rgba(0, 0, 0, 0.75) 100%
+    var(--vignette-mid) 70%,
+    var(--vignette-outer) 100%
   );
   opacity: var(--vignette-opacity);
 }

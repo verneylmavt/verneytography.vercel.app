@@ -191,6 +191,7 @@ export function HeroTopographicBackground() {
           powerPreference: "high-performance",
         });
         renderer.setClearColor(0x000000, 0);
+        renderer.domElement.className = "hero-topo-canvas";
         renderer.domElement.style.width = "100%";
         renderer.domElement.style.height = "100%";
         renderer.domElement.style.display = "block";
@@ -277,9 +278,9 @@ export function HeroTopographicBackground() {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
       <div ref={containerRef} className="absolute inset-0" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.30),rgba(0,0,0,0.12)_18%,rgba(0,0,0,0.20)_52%,rgba(0,0,0,0.34)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent_34%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,rgba(255,255,255,0.1),transparent_44%)] opacity-35" />
+      <div className="absolute inset-0 [background:var(--hero-topo-linear)]" />
+      <div className="absolute inset-0 [background:var(--hero-topo-radial-top)]" />
+      <div className="absolute inset-0 [background:var(--hero-topo-radial-bottom)]" />
     </div>
   );
 }

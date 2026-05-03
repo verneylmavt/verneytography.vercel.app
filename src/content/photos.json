@@ -126,9 +126,9 @@
     }
   },
   {
-    "id": "10",
-    "thumbUrl": "/demo/10.jpg",
-    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/10_X.jpg",
+    "id": "8",
+    "thumbUrl": "/demo/8.jpg",
+    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/8_X.jpg",
     "width": 3757,
     "height": 2501,
     "description": "A child gathering the night in a billow of crimson cloth.",
@@ -141,24 +141,6 @@
       "shutterSpeed": "1/160",
       "iso": 5000,
       "takenAt": "2019-04-25T20:30:00+07:00"
-    }
-  },
-  {
-    "id": "11",
-    "thumbUrl": "/demo/11.jpg",
-    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/11_X.jpg",
-    "width": 4869,
-    "height": 3246,
-    "description": "Torches blazing, a solemn procession of youth.",
-    "tags": ["street", "school", "student"],
-    "exif": {
-      "camera": "Sony A7 II",
-      "lens": "FE 50mm F/1.8",
-      "focalLength": "50mm",
-      "aperture": "F/1.8",
-      "shutterSpeed": "1/100",
-      "iso": 4000,
-      "takenAt": "2019-07-18T18:02:00+07:00"
     }
   }
 ]

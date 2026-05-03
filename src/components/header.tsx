@@ -12,6 +12,7 @@ import {
 } from "react";
 
 import { site } from "@/content/site";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type Section = { id: string; label: string };
 
@@ -215,7 +216,9 @@ export function Header() {
           </button>
         </div>
 
-        <div className="justify-self-end" aria-hidden />
+        <div className="justify-self-end">
+          <ThemeToggle />
+        </div>
       </div>
 
       <div
