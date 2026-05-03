@@ -127,7 +127,10 @@ export function PhotoLightbox({
             </div>
           ) : null}
 
-          <Dialog.Close className="liquid-glass liquid-glass--premium absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full text-sm text-foreground/85 transition hover:text-foreground">
+          <Dialog.Close
+            className="liquid-glass liquid-glass--premium z-10 inline-flex h-10 w-10 items-center justify-center rounded-full text-sm text-foreground/85 transition hover:text-foreground"
+            style={{ position: "absolute", top: 16, right: 16 }}
+          >
             <span className="sr-only">Close</span>
             <span aria-hidden>✕</span>
           </Dialog.Close>

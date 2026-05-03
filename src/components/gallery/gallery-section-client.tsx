@@ -119,7 +119,7 @@ function GalleryMasonry({
               "transform-gpu hover:-translate-y-0.5 motion-reduce:transform-none",
             ].join(" ")}
           >
-            Load more
+            ...
           </button>
         </div>
       ) : null}

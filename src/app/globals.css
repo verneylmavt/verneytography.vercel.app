@@ -234,9 +234,12 @@ html[data-theme="light"] .hero-topo-canvas {
   transform: translateZ(0);
 }
 
-.liquid-glass--premium {
-  position: relative;
+:where(.liquid-glass--premium) {
   isolation: isolate;
+}
+
+:where(.liquid-glass--premium):not(.absolute):not(.fixed):not(.relative):not(.sticky):not(.static) {
+  position: relative;
 }
 
 .liquid-glass--premium::before,
