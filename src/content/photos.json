@@ -36,24 +36,6 @@
     }
   },
   {
-    "id": "3",
-    "thumbUrl": "/demo/3.jpg",
-    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/3_X.jpg",
-    "width": 6000,
-    "height": 3824,
-    "description": "A decisive free throw suspended beneath blazing lights.",
-    "tags": ["sports", "basketball", "school"],
-    "exif": {
-      "camera": "Sony A7 II",
-      "lens": "FE 28-70mm F/3.5-5.6",
-      "focalLength": "28mm",
-      "aperture": "F/5.6",
-      "shutterSpeed": "1/160",
-      "iso": 1600,
-      "takenAt": "2019-09-03T15:43:00+07:00"
-    }
-  },
-  {
     "id": "4",
     "thumbUrl": "/demo/4.jpg",
     "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/4_X.jpg",
@@ -141,6 +123,42 @@
       "shutterSpeed": "1/100",
       "iso": 4000,
       "takenAt": "2019-07-18T18:02:00+07:00"
+    }
+  },
+  {
+    "id": "9",
+    "thumbUrl": "/demo/9.jpg",
+    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/9_X.jpg",
+    "width": 5413,
+    "height": 3609,
+    "description": "Twilight handshakes, laughter threading through dim morning light.",
+    "tags": ["journalism", "school", "student"],
+    "exif": {
+      "camera": "Sony A7 II",
+      "lens": "FE 50mm F/1.8",
+      "focalLength": "50mm",
+      "aperture": "F/1.8",
+      "shutterSpeed": "1/160",
+      "iso": 4000,
+      "takenAt": "2019-07-16T04:43:00+07:00"
+    }
+  },
+  {
+    "id": "10",
+    "thumbUrl": "/demo/10.jpg",
+    "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/10_X.jpg",
+    "width": 4789,
+    "height": 2694,
+    "description": "Soaring drive through a sea of defenders, determination etched in motion.",
+    "tags": ["sports", "basketball", "school"],
+    "exif": {
+      "camera": "Sony A7 II",
+      "lens": "FE 28-70mm F/3.5-5.6",
+      "focalLength": "28mm",
+      "aperture": "F/3.5",
+      "shutterSpeed": "1/800",
+      "iso": 6400,
+      "takenAt": "2019-08-31T15:06:00+07:00"
     }
   }
 ]

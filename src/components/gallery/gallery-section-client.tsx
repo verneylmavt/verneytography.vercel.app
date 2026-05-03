@@ -62,13 +62,13 @@ function GalleryMasonry({
 
   return (
     <div className="mt-10">
-      <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {visiblePhotos.map((photo) => (
           <button
             key={photo.id}
             type="button"
             onClick={() => onSelectPhoto(photo.id)}
-            className="group mb-5 block w-full break-inside-avoid text-left focus-visible:outline-none"
+            className="group block w-full text-left focus-visible:outline-none"
           >
             <div className="liquid-glass relative overflow-hidden rounded-3xl shadow-[0_25px_80px_-50px_rgba(0,0,0,0.9)] transition">
               <Image
