@@ -8,7 +8,7 @@ export const GALLERY_PHOTO_ID_ORDER = [
   "5",
   "10",
   "6",
-  "8",
+  "13",
   "12",
 ] as const;
 
