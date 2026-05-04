@@ -12,6 +12,7 @@
     "build:webpack": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
+    "photos:fill-meta": "tsx scripts/photos-fill-meta.ts",
     "photos:sync": "tsx scripts/photos-sync.ts",
     "photos:sync:dry": "tsx scripts/photos-sync.ts --dry-run"
   },

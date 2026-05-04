@@ -6,9 +6,13 @@
     "width": 5567,
     "height": 3882,
     "description": "Joyful chorus of students moving in perfect harmony.",
-    "tags": ["journalism", "school", "student"],
+    "tags": [
+      "journalism",
+      "school",
+      "student"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
@@ -21,18 +25,22 @@
     "id": "2",
     "thumbUrl": "/demo/2.jpg",
     "fullUrl": "https://s3f8qod2qyfqjhs6.public.blob.vercel-storage.com/2_JArlT.jpg",
-    "width": 2687,
-    "height": 1663,
+    "width": 5374,
+    "height": 3326,
     "description": "The capo’s raised hands summoning a sea of voices.",
-    "tags": ["journalism", "basketball", "school"],
+    "tags": [
+      "journalism",
+      "basketball",
+      "school"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
       "shutterSpeed": "1/320",
       "iso": 8000,
-      "takenAt": "2019-08-20T19:11:00+07:00"
+      "takenAt": "2018-08-20T19:11:00+07:00"
     }
   },
   {
@@ -42,9 +50,13 @@
     "width": 5852,
     "height": 3549,
     "description": "A spirited dance unfolding before an Indonesian flag.",
-    "tags": ["journalism", "school", "dance"],
+    "tags": [
+      "journalism",
+      "school",
+      "dance"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 28-70mm F/3.5-5.6",
       "focalLength": "28mm",
       "aperture": "F/3.5",
@@ -60,9 +72,13 @@
     "width": 5495,
     "height": 3663,
     "description": "Bodies colliding in a fierce contest beneath the rim.",
-    "tags": ["sports", "basketball", "school"],
+    "tags": [
+      "sports",
+      "basketball",
+      "school"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 28-70mm F/3.5-5.6",
       "focalLength": "28mm",
       "aperture": "F/3.5",
@@ -78,15 +94,19 @@
     "width": 5286,
     "height": 3524,
     "description": "The season’s finest sealing fate at the line in a clash of rivals.",
-    "tags": ["sports", "basketball", "school"],
+    "tags": [
+      "sports",
+      "basketball",
+      "school"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
       "shutterSpeed": "1/800",
       "iso": 3200,
-      "takenAt": "2019-09-21T18:50:00+07:00"
+      "takenAt": "2019-09-16T19:49:00+07:00"
     }
   },
   {
@@ -96,9 +116,13 @@
     "width": 4894,
     "height": 3370,
     "description": "Blindfolded student navigating the world of playful chaos.",
-    "tags": ["journalism", "school", "student"],
+    "tags": [
+      "journalism",
+      "school",
+      "student"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 28-70mm F/3.5-5.6",
       "focalLength": "38mm",
       "aperture": "F/4.5",
@@ -114,11 +138,15 @@
     "width": 4869,
     "height": 3246,
     "description": "Torches blazing, a solemn procession of youth.",
-    "tags": ["journalism", "school", "student"],
+    "tags": [
+      "journalism",
+      "school",
+      "student"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A6400",
       "lens": "FE 50mm F/1.8",
-      "focalLength": "50mm",
+      "focalLength": "75mm",
       "aperture": "F/1.8",
       "shutterSpeed": "1/100",
       "iso": 4000,
@@ -132,9 +160,13 @@
     "width": 5413,
     "height": 3609,
     "description": "Twilight handshakes, laughter threading through dim morning light.",
-    "tags": ["journalism", "school", "student"],
+    "tags": [
+      "journalism",
+      "school",
+      "student"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
@@ -150,9 +182,13 @@
     "width": 4789,
     "height": 2694,
     "description": "Soaring drive through a sea of defenders, determination etched in motion.",
-    "tags": ["sports", "basketball", "school"],
+    "tags": [
+      "sports",
+      "basketball",
+      "school"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 28-70mm F/3.5-5.6",
       "focalLength": "28mm",
       "aperture": "F/3.5",
@@ -168,9 +204,13 @@
     "width": 5306,
     "height": 3578,
     "description": "Morning light on focused hands, tossing spheres in silent ritual.",
-    "tags": ["journalism", "school", "student"],
+    "tags": [
+      "journalism",
+      "school",
+      "student"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/2.2",
@@ -186,9 +226,12 @@
     "width": 3757,
     "height": 2501,
     "description": "A child gathering the night in a billow of crimson cloth.",
-    "tags": ["street", "night"],
+    "tags": [
+      "street",
+      "night"
+    ],
     "exif": {
-      "camera": "Sony A7 II",
+      "camera": "SONY A7 II",
       "lens": "FE 50mm F/1.8",
       "focalLength": "50mm",
       "aperture": "F/1.8",
@@ -198,4 +241,3 @@
     }
   }
 ]
-
