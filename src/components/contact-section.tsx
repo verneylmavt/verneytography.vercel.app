@@ -65,7 +65,6 @@ export function ContactSection() {
       <footer className="mt-16 pb-10 text-sm text-muted">
         <p>
           ©verneytography. Inspired by contour lines.
-          https://github.com/verneylmavt/verneytography.vercel.app/tree/v1
         </p>
       </footer>
     </section>
