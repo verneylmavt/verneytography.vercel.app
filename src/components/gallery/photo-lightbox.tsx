@@ -2,17 +2,11 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import Image from "next/image";
+import { useRef } from "react";
 
 import type { Photo } from "@/lib/types";
 
-function formatTag(tag: string): string {
-  return tag
-    .replace(/[-_]+/g, " ")
-    .split(" ")
-    .filter(Boolean)
-    .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
-    .join(" ");
-}
+import { exifSummary, formatTag, pad3 } from "./format";
 
 function formatTakenAt(value: string | undefined): string | null {
   if (!value) return null;
@@ -21,16 +15,41 @@ function formatTakenAt(value: string | undefined): string | null {
   return new Intl.DateTimeFormat(undefined, { dateStyle: "medium" }).format(date);
 }
 
+type ExifRow = { label: string; value: string | number | null | undefined };
+
 export function PhotoLightbox({
   photo,
   open,
   onClose,
+  onPrev,
+  onNext,
+  index,
+  total,
 }: {
   photo: Photo | null;
   open: boolean;
   onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+  index: number;
+  total: number;
 }) {
-  const takenAt = photo?.exif?.takenAt ? formatTakenAt(photo.exif.takenAt) : null;
+  const pointerStartX = useRef<number | null>(null);
+  const canNavigate = total > 1;
+
+  const takenAt = photo?.exif?.takenAt
+    ? formatTakenAt(photo.exif.takenAt)
+    : null;
+
+  const rows: ExifRow[] = [
+    { label: "Camera", value: photo?.exif?.camera },
+    { label: "Lens", value: photo?.exif?.lens },
+    { label: "Focal", value: photo?.exif?.focalLength },
+    { label: "Aperture", value: photo?.exif?.aperture },
+    { label: "Shutter", value: photo?.exif?.shutterSpeed },
+    { label: "ISO", value: photo?.exif?.iso },
+    { label: "Date", value: takenAt },
+  ];
 
   return (
     <Dialog.Root
@@ -40,98 +59,112 @@ export function PhotoLightbox({
       }}
     >
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm data-[state=open]:animate-[fadeIn_220ms_ease-out] data-[state=closed]:animate-[fadeOut_180ms_ease-in]" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-[min(1100px,calc(100vw-2.25rem))] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-3xl border border-border/10 bg-background/[0.65] shadow-2xl backdrop-blur-xl focus:outline-none data-[state=open]:animate-[zoomIn_220ms_ease-out] data-[state=closed]:animate-[zoomOut_180ms_ease-in]">
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-[rgb(var(--ink)/0.85)] backdrop-blur-sm data-[state=open]:animate-[fadeIn_200ms_ease-out] data-[state=closed]:animate-[fadeOut_160ms_ease-in]" />
+        <Dialog.Content
+          onKeyDown={(event) => {
+            if (!canNavigate) return;
+            if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              onPrev();
+            } else if (event.key === "ArrowRight") {
+              event.preventDefault();
+              onNext();
+            }
+          }}
+          className="fixed left-1/2 top-1/2 z-50 w-[min(1100px,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 border border-rule bg-paper focus:outline-none data-[state=open]:animate-[lbIn_200ms_ease-out] data-[state=closed]:animate-[lbOut_160ms_ease-in]"
+        >
           {photo ? (
-            <div className="flex max-h-[85svh] flex-col lg:flex-row">
-              <div className="relative flex max-h-[55svh] items-center justify-center bg-[rgb(var(--foreground)/0.04)] p-4 sm:p-5 lg:max-h-none lg:flex-[1.2] lg:p-0">
+            <div className="flex max-h-[86svh] flex-col lg:flex-row">
+              <div
+                className="relative flex max-h-[55svh] flex-1 items-center justify-center bg-[rgb(var(--ink)/0.04)] p-3 sm:p-4 lg:max-h-none lg:border-r lg:border-rule"
+                onPointerDown={(event) => {
+                  pointerStartX.current = event.clientX;
+                }}
+                onPointerUp={(event) => {
+                  if (pointerStartX.current === null || !canNavigate) return;
+                  const dx = event.clientX - pointerStartX.current;
+                  pointerStartX.current = null;
+                  if (dx > 50) onPrev();
+                  else if (dx < -50) onNext();
+                }}
+              >
                 <Image
                   src={photo.fullUrl}
                   alt={photo.description}
                   width={photo.width}
                   height={photo.height}
-                  sizes="(min-width: 1024px) 65vw, 100vw"
+                  sizes="(min-width: 1024px) 60vw, 100vw"
                   className="h-auto max-h-full w-auto max-w-full select-none object-contain"
                 />
               </div>
 
-              <div className="min-h-0 flex-1 overflow-y-auto border-t border-border/10 p-6 sm:p-8 lg:flex-[0.8] lg:border-l lg:border-t-0">
-                <div className="pr-14">
-                  <Dialog.Title className="text-lg font-semibold tracking-tight text-foreground">
-                    {photo.description}
-                  </Dialog.Title>
-                  <Dialog.Description className="sr-only">
-                    Photo details and EXIF metadata.
-                  </Dialog.Description>
-                  {photo.tags.length > 0 ? (
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {photo.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="liquid-glass inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium text-foreground/80"
-                        >
-                          {formatTag(tag)}
-                        </span>
-                      ))}
-                    </div>
+              <div className="min-h-0 w-full overflow-y-auto p-6 sm:p-8 lg:w-[22rem] lg:shrink-0">
+                <div className="u-label flex items-center justify-between">
+                  <span className="u-tabular text-red">
+                    {pad3(index)} / {pad3(total)}
+                  </span>
+                  {canNavigate ? (
+                    <span className="inline-flex gap-1">
+                      <button
+                        type="button"
+                        onClick={onPrev}
+                        aria-label="Previous photo"
+                        className="border border-rule px-2 py-1 text-ink transition-colors hover:border-ink hover:text-red"
+                      >
+                        ←
+                      </button>
+                      <button
+                        type="button"
+                        onClick={onNext}
+                        aria-label="Next photo"
+                        className="border border-rule px-2 py-1 text-ink transition-colors hover:border-ink hover:text-red"
+                      >
+                        →
+                      </button>
+                    </span>
                   ) : null}
                 </div>
 
-                <div className="mt-8 border-t border-border/10 pt-6">
-                  <div className="grid gap-3">
-                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                      <span className="text-muted">Camera</span>
-                      <span className="min-w-0 break-words text-foreground/90">
-                        {photo.exif?.camera ?? "—"}
+                <Dialog.Title className="mt-4 text-lg leading-snug text-ink">
+                  {photo.description}
+                </Dialog.Title>
+                <Dialog.Description className="sr-only">
+                  Photo details and EXIF metadata.
+                </Dialog.Description>
+
+                {photo.tags.length > 0 ? (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {photo.tags.map((tag) => (
+                      <span key={tag} className="u-tag cursor-default">
+                        {formatTag(tag)}
                       </span>
-                    </div>
-                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                      <span className="text-muted">Lens</span>
-                      <span className="min-w-0 break-words text-foreground/90">
-                        {photo.exif?.lens ?? "—"}
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                      <span className="text-muted">Focal length</span>
-                      <span className="min-w-0 break-words text-foreground/90">
-                        {photo.exif?.focalLength ?? "—"}
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                      <span className="text-muted">Aperture</span>
-                      <span className="min-w-0 break-words text-foreground/90">
-                        {photo.exif?.aperture ?? "—"}
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                      <span className="text-muted">Shutter</span>
-                      <span className="min-w-0 break-words text-foreground/90">
-                        {photo.exif?.shutterSpeed ?? "—"}
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                      <span className="text-muted">ISO</span>
-                      <span className="min-w-0 break-words text-foreground/90">
-                        {photo.exif?.iso ?? "—"}
-                      </span>
-                    </div>
-                    <div className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-[130px_1fr] sm:gap-3">
-                      <span className="text-muted">Date</span>
-                      <span className="min-w-0 break-words text-foreground/90">
-                        {takenAt ?? "—"}
-                      </span>
-                    </div>
+                    ))}
                   </div>
-                </div>
+                ) : null}
+
+                <dl className="mt-6 border-t border-rule">
+                  {rows.map((row) => (
+                    <div
+                      key={row.label}
+                      className="flex items-baseline justify-between gap-4 border-b border-rule py-2.5"
+                    >
+                      <dt className="u-label">{row.label}</dt>
+                      <dd className="min-w-0 break-words text-right text-sm text-ink">
+                        {row.value ?? "—"}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <p className="u-label mt-6 text-mute">{exifSummary(photo)}</p>
               </div>
             </div>
           ) : null}
 
           <Dialog.Close
-            className="liquid-glass liquid-glass--premium z-10 inline-flex h-10 w-10 items-center justify-center rounded-full text-sm text-foreground/85 transition hover:text-foreground"
-            style={{ position: "absolute", top: 16, right: 16 }}
+            aria-label="Close"
+            className="u-label absolute right-3 top-3 border border-rule bg-paper px-3 py-2 text-ink transition-colors hover:border-ink hover:text-red"
           >
-            <span className="sr-only">Close</span>
             <span aria-hidden>✕</span>
           </Dialog.Close>
         </Dialog.Content>

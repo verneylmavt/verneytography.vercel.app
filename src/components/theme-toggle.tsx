@@ -1,7 +1,6 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
@@ -34,7 +33,7 @@ function applyTheme(theme: Theme, persist: boolean) {
     try {
       window.localStorage.setItem(STORAGE_KEY, theme);
     } catch {
-      // Ignore: e.g. Safari private mode can throw on setItem.
+      // Ignore: Safari private mode can throw on setItem.
     }
   }
 }
@@ -50,10 +49,11 @@ export function ThemeToggle() {
   }, []);
 
   const isDark = theme === "dark";
-  const ariaLabel = useMemo(() => {
-    if (!theme) return "Toggle theme";
-    return isDark ? "Switch to light mode" : "Switch to dark mode";
-  }, [isDark, theme]);
+  const ariaLabel = !theme
+    ? "Toggle theme"
+    : isDark
+      ? "Switch to light mode"
+      : "Switch to dark mode";
 
   return (
     <button
@@ -66,22 +66,18 @@ export function ThemeToggle() {
         applyTheme(next, true);
         setTheme(next);
       }}
-      className={[
-        "liquid-glass liquid-glass--premium inline-flex h-10 w-10 items-center justify-center rounded-full transition",
-        "text-foreground/90 hover:text-foreground",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-      ].join(" ")}
+      className="u-label inline-flex items-center gap-2 border border-rule px-3 py-2 text-ink transition-colors hover:border-ink"
     >
-      <span className="sr-only">{ariaLabel}</span>
-      {theme ? (
-        isDark ? (
-          <Sun aria-hidden className="h-5 w-5" />
-        ) : (
-          <Moon aria-hidden className="h-5 w-5" />
-        )
-      ) : (
-        <Sun aria-hidden className="h-5 w-5 opacity-0" />
-      )}
+      <span
+        aria-hidden
+        className={[
+          "inline-block h-2 w-2 rounded-full border border-ink transition-colors",
+          theme ? (isDark ? "bg-transparent" : "bg-ink") : "bg-transparent",
+        ].join(" ")}
+      />
+      <span aria-hidden className="min-w-[2.5em] text-left">
+        {theme ? (isDark ? "Dark" : "Light") : "···"}
+      </span>
     </button>
   );
 }

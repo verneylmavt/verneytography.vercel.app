@@ -1,30 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Newsreader } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 
 import { site } from "@/content/site";
-import { HeroTopographicBackground } from "@/components/hero-topographic-background";
 import { ScrollToTopOnReload } from "@/components/scroll-to-top-on-reload";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
-  subsets: ["latin"],
+  display: "swap",
+  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
 });
 
 export const metadata: Metadata = {
-  title: `verneytography`,
-  description: `${site.hero.tagline}.`,
+  title: "verneytography",
+  description: `${site.hero.name} — ${site.hero.tagline}, ${site.hero.location}.`,
 };
 
 export default function RootLayout({
@@ -36,9 +27,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${newsreader.variable} h-full antialiased`}
+      className={jetbrainsMono.variable}
     >
-      <body className="min-h-full bg-background text-foreground font-sans selection:bg-foreground/10 selection:text-foreground">
+      <body className="min-h-screen bg-paper text-ink font-mono">
         <Script id="theme-init" strategy="beforeInteractive">{`
           (function () {
             var storageKey = ${JSON.stringify("theme")};
@@ -52,7 +43,6 @@ export default function RootLayout({
             root.classList.add("theme-ready");
           })();
         `}</Script>
-        <HeroTopographicBackground />
         <ScrollToTopOnReload />
         {children}
       </body>

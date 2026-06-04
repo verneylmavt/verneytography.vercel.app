@@ -1,47 +1,49 @@
 import { Suspense } from "react";
 
 import type { Photo } from "@/lib/types";
+import { HashtagLabel } from "@/components/primitives/hashtag-label";
 
+import { pad2 } from "./format";
 import { GallerySectionClient } from "./gallery-section-client";
 
-function GalleryBodyFallback() {
+function GalleryFallback() {
   return (
-    <>
-      <div className="mt-8 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible">
-        {Array.from({ length: 8 }).map((_, index) => (
+    <div className="mt-10">
+      <div className="flex flex-wrap gap-2 border-t border-rule pt-8">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div key={i} className="h-9 w-20 border border-rule" />
+        ))}
+      </div>
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, i) => (
           <div
-            key={index}
-            className="h-7 w-20 rounded-full border border-[rgb(var(--border)/0.12)] bg-[rgb(var(--surface)/0.40)]"
+            key={i}
+            className="aspect-[4/3] border border-rule bg-[rgb(var(--ink)/0.03)]"
           />
         ))}
       </div>
-
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <div
-            key={index}
-            className="aspect-[4/3] rounded-3xl border border-[rgb(var(--border)/0.10)] bg-[rgb(var(--background)/0.35)] backdrop-blur-md"
-          />
-        ))}
-      </div>
-    </>
+    </div>
   );
 }
 
 export function GallerySection({ photos }: { photos: Photo[] }) {
   return (
-    <section id="gallery" className="scroll-mt-28 py-24">
-      <div className="flex flex-col items-start justify-between gap-6 border-t border-[rgb(var(--border)/0.10)] pt-10 sm:flex-row sm:items-end">
-        <div>
-          <h2 className="text-3xl font-medium tracking-tight text-foreground sm:text-4xl font-[family:var(--font-serif)]">
-            Gallery
-          </h2>
+    <section id="work" className="u-rule-t scroll-mt-24">
+      <div className="u-shell py-20 sm:py-28">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <HashtagLabel index="04" label="Selected Works" />
+            <h2 className="u-display text-h1 mt-4 leading-[1.0] tracking-[-0.01em]">Works</h2>
+          </div>
+          <span className="u-label u-tabular">
+            [ {pad2(photos.length)} Frames ]
+          </span>
         </div>
-      </div>
 
-      <Suspense fallback={<GalleryBodyFallback />}>
-        <GallerySectionClient photos={photos} />
-      </Suspense>
+        <Suspense fallback={<GalleryFallback />}>
+          <GallerySectionClient photos={photos} />
+        </Suspense>
+      </div>
     </section>
   );
 }

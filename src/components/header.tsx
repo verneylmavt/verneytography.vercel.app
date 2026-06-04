@@ -1,6 +1,5 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import {
   useCallback,
@@ -18,12 +17,15 @@ type Section = { id: string; label: string };
 
 const sections: Section[] = [
   { id: "home", label: "Home" },
-  { id: "gallery", label: "Gallery" },
+  { id: "about", label: "About" },
+  { id: "stats", label: "Stats" },
+  { id: "work", label: "Works" },
+  { id: "info", label: "Info" },
   { id: "contact", label: "Contact" },
 ];
 
 function useActiveSection(sectionIds: string[]) {
-  const [active, setActive] = useState(sectionIds[0] ?? "home");
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const elements = sectionIds
@@ -36,10 +38,7 @@ function useActiveSection(sectionIds: string[]) {
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0),
-          );
+          .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0));
 
         const top = visible[0];
         if (top?.target instanceof HTMLElement) setActive(top.target.id);
@@ -80,7 +79,6 @@ export function Header() {
       );
       return;
     }
-
     setHighlight({ x: link.offsetLeft, width: link.offsetWidth, ready: true });
   }, [activeId]);
 
@@ -118,7 +116,6 @@ export function Header() {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setMobileMenuOpen(false);
     };
-
     const handlePointerDown = (event: PointerEvent) => {
       const target = event.target;
       if (!(target instanceof Node)) return;
@@ -138,87 +135,71 @@ export function Header() {
   return (
     <header
       className={[
-        "sticky top-0 z-40 w-full relative",
+        "sticky top-0 z-40 w-full border-b border-rule transition-colors",
         scrolled
-          ? "bg-[rgb(var(--background)/0.6)] backdrop-blur-xl"
-          : "bg-[rgb(var(--background)/0.15)] backdrop-blur-md",
+          ? "bg-[rgb(var(--paper)/0.9)] backdrop-blur-md"
+          : "bg-[rgb(var(--paper)/0.65)] backdrop-blur-sm",
       ].join(" ")}
     >
-      <div className="mx-auto grid h-16 w-full max-w-6xl grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+      <div className="u-shell flex h-16 items-center justify-between gap-4">
         <Link
           href="#home"
-          className="min-w-0 max-w-[12rem] truncate justify-self-start text-xs font-semibold tracking-tight text-foreground transition hover:text-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:max-w-none sm:text-sm"
+          className="u-link shrink-0 text-sm font-medium uppercase tracking-[0.06em] text-ink"
         >
           {site.brand}
+          <span className="text-red">©</span>
         </Link>
 
-        <div className="justify-self-center">
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Sections">
-            <ul
-              ref={navRef}
-              className="liquid-glass relative flex items-center gap-1 rounded-full p-1"
-            >
-              <span
-                aria-hidden
-                className={[
-                  "pointer-events-none absolute inset-y-1 left-0 rounded-full bg-[rgb(var(--foreground)/0.08)]",
-                  "transition-[transform,width,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
-                  highlight.ready ? "opacity-100" : "opacity-0",
-                ].join(" ")}
-                style={{
-                  width: highlight.width,
-                  transform: `translateX(${highlight.x}px)`,
-                }}
-              />
-              {sections.map((section) => {
-                const active = activeId === section.id;
-                return (
-                  <li key={section.id}>
-                    <Link
-                      href={`#${section.id}`}
-                      ref={(node) => {
-                        linkRefs.current[section.id] = node;
-                      }}
-                      aria-current={active ? "page" : undefined}
-                      className={[
-                        "relative z-10 rounded-full px-3 py-2 text-sm transition-colors",
-                        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent)/0.45)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-                        active
-                          ? "text-foreground"
-                          : "text-muted hover:text-foreground",
-                      ].join(" ")}
-                    >
-                      {section.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+        <nav className="hidden md:block" aria-label="Sections">
+          <ul ref={navRef} className="relative flex h-16 items-center gap-7">
+            <span
+              aria-hidden
+              className={[
+                "pointer-events-none absolute bottom-0 left-0 h-[2px] bg-red",
+                "transition-[transform,width,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                highlight.ready ? "opacity-100" : "opacity-0",
+              ].join(" ")}
+              style={{
+                width: highlight.width,
+                transform: `translateX(${highlight.x}px)`,
+              }}
+            />
+            {sections.map((section) => {
+              const active = activeId === section.id;
+              return (
+                <li key={section.id}>
+                  <Link
+                    href={`#${section.id}`}
+                    ref={(node) => {
+                      linkRefs.current[section.id] = node;
+                    }}
+                    aria-current={active ? "page" : undefined}
+                    className={[
+                      "text-[0.75rem] uppercase tracking-[0.06em] transition-colors",
+                      active ? "text-ink" : "text-mute hover:text-ink",
+                    ].join(" ")}
+                  >
+                    {section.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
 
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
           <button
             ref={mobileMenuButtonRef}
             type="button"
             onClick={() => setMobileMenuOpen((value) => !value)}
-            className={[
-              "liquid-glass liquid-glass--premium inline-flex h-10 w-10 items-center justify-center rounded-full md:hidden transition",
-              "text-foreground/90 hover:text-foreground",
-              "transform-gpu hover:-translate-y-0.5 motion-reduce:transform-none",
-            ].join(" ")}
+            className="u-label border border-rule px-3 py-2 text-ink transition-colors hover:border-ink md:hidden"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
             aria-controls="mobile-nav"
           >
-            {mobileMenuOpen ? (
-              <X aria-hidden className="h-5 w-5" />
-            ) : (
-              <Menu aria-hidden className="h-5 w-5" />
-            )}
+            {mobileMenuOpen ? "Close" : "Menu"}
           </button>
-        </div>
-
-        <div className="justify-self-end">
-          <ThemeToggle />
         </div>
       </div>
 
@@ -232,32 +213,27 @@ export function Header() {
         ].join(" ")}
       >
         <div className="overflow-hidden">
-          <div className="mx-auto w-full max-w-6xl px-4 pb-4 sm:px-6 lg:px-8">
-            <div className="liquid-glass rounded-2xl p-2">
-              <div className="grid gap-1 p-1">
-                {sections.map((section) => {
-                  const active = activeId === section.id;
-
-                  return (
-                    <Link
-                      key={section.id}
-                      href={`#${section.id}`}
-                      onClick={() => setMobileMenuOpen(false)}
-                      aria-current={active ? "page" : undefined}
-                      className={[
-                        "liquid-glass liquid-glass--premium flex items-center justify-between rounded-xl px-4 py-3 text-sm transition-colors",
-                        active
-                          ? "liquid-glass--active text-foreground"
-                          : "text-foreground/85 hover:text-foreground",
-                      ].join(" ")}
-                    >
-                      <span>{section.label}</span>
-                      <span className="text-foreground/55">{"\u2192"}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
+          <div className="u-shell grid gap-px border-t border-rule py-2">
+            {sections.map((section) => {
+              const active = activeId === section.id;
+              return (
+                <Link
+                  key={section.id}
+                  href={`#${section.id}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={[
+                    "flex items-center justify-between border-b border-rule py-4 text-[0.875rem] uppercase tracking-[0.06em] transition-colors",
+                    active ? "text-red" : "text-ink hover:text-red",
+                  ].join(" ")}
+                >
+                  <span>{section.label}</span>
+                  <span aria-hidden className="text-mute">
+                    ↗
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

@@ -1,23 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import type { Photo } from "@/lib/types";
 
 import { PhotoLightbox } from "./photo-lightbox";
+import { GalleryGrid } from "./gallery-grid";
+import { GalleryIndexList } from "./gallery-index-list";
+import { GalleryViewToggle, type GalleryView } from "./gallery-view-toggle";
+import { formatTag, pad2 } from "./format";
 
 const PAGE_SIZE = 10;
-
-function formatTag(tag: string): string {
-  return tag
-    .replace(/[-_]+/g, " ")
-    .split(" ")
-    .filter(Boolean)
-    .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
-    .join(" ");
-}
 
 function buildUrl(
   pathname: string,
@@ -49,60 +44,49 @@ function pushGalleryUrl(pathname: string, searchParams: URLSearchParams) {
   );
 }
 
-function GalleryMasonry({
+function GalleryBody({
   photos,
-  onSelectPhoto,
+  numberById,
+  view,
+  onSelect,
 }: {
   photos: Photo[];
-  onSelectPhoto: (id: string) => void;
+  numberById: Map<string, string>;
+  view: GalleryView;
+  onSelect: (id: string) => void;
 }) {
+  const reduce = useReducedMotion() ?? false;
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
-  const visiblePhotos = photos.slice(0, visibleCount);
+  const visible = photos.slice(0, visibleCount);
   const hasMore = visibleCount < photos.length;
+  const nextChunk = Math.min(PAGE_SIZE, photos.length - visibleCount);
 
   return (
     <div className="mt-10">
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {visiblePhotos.map((photo) => (
-          <button
-            key={photo.id}
-            type="button"
-            onClick={() => onSelectPhoto(photo.id)}
-            className="group block w-full text-left focus-visible:outline-none"
-          >
-            <div className="liquid-glass relative overflow-hidden rounded-3xl shadow-[0_25px_80px_-50px_rgba(0,0,0,0.9)] transition">
-              <Image
-                src={photo.thumbUrl}
-                alt={photo.description}
-                width={photo.width}
-                height={photo.height}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="h-auto w-full select-none object-cover transition duration-500 group-hover:scale-[1.02]"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/95 via-background/35 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4 opacity-0 transition duration-300 group-hover:opacity-100 sm:p-5">
-                <div className="liquid-glass rounded-2xl px-4 py-3">
-                  <p className="text-sm font-medium text-foreground">
-                    {photo.description}
-                  </p>
-                  {photo.tags.length > 0 ? (
-                    <div className="mt-2 flex flex-wrap gap-2">
-                      {photo.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="liquid-glass inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium text-foreground/85"
-                        >
-                          {formatTag(tag)}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </button>
-        ))}
-      </div>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={view}
+          initial={reduce ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={reduce ? undefined : { opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {view === "index" ? (
+            <GalleryIndexList
+              photos={visible}
+              numberById={numberById}
+              onSelect={onSelect}
+            />
+          ) : (
+            <GalleryGrid
+              photos={visible}
+              numberById={numberById}
+              onSelect={onSelect}
+              reduce={reduce}
+            />
+          )}
+        </motion.div>
+      </AnimatePresence>
 
       {hasMore ? (
         <div className="mt-10 flex justify-center">
@@ -113,13 +97,9 @@ function GalleryMasonry({
                 Math.min(count + PAGE_SIZE, photos.length),
               )
             }
-            className={[
-              "liquid-glass liquid-glass--premium inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm transition",
-              "text-foreground/90 hover:text-foreground",
-              "transform-gpu hover:-translate-y-0.5 motion-reduce:transform-none",
-            ].join(" ")}
+            className="u-label border border-rule px-5 py-3 text-ink transition-colors hover:border-ink hover:text-red"
           >
-            ...
+            [ Load {nextChunk} more ]
           </button>
         </div>
       ) : null}
@@ -133,8 +113,17 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
 
   const selectedTag = searchParams.get("tag");
   const selectedPhotoId = searchParams.get("photo");
+  const view: GalleryView =
+    searchParams.get("view") === "index" ? "index" : "grid";
 
   const openedViaClickRef = useRef(false);
+
+  // Stable catalog numbers (01–NN) keyed by id, from the full ordered set.
+  const numberById = useMemo(() => {
+    const map = new Map<string, string>();
+    photos.forEach((photo, i) => map.set(photo.id, pad2(i + 1)));
+    return map;
+  }, [photos]);
 
   const tags = useMemo(() => {
     const tagCounts = new Map<string, number>();
@@ -143,7 +132,6 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
         tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
       }
     }
-
     return Array.from(tagCounts.entries())
       .sort((a, b) => {
         const countDiff = b[1] - a[1];
@@ -162,6 +150,11 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
     if (!selectedPhotoId) return null;
     return photos.find((photo) => photo.id === selectedPhotoId) ?? null;
   }, [photos, selectedPhotoId]);
+
+  const navIndex = useMemo(() => {
+    if (!selectedPhoto) return -1;
+    return filtered.findIndex((photo) => photo.id === selectedPhoto.id);
+  }, [filtered, selectedPhoto]);
 
   useEffect(() => {
     if (!selectedPhotoId) return;
@@ -186,11 +179,24 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
     replaceGalleryUrl(pathname, next);
   }
 
+  function setView(nextView: GalleryView) {
+    const next = getCurrentSearchParams();
+    if (nextView === "grid") next.delete("view");
+    else next.set("view", nextView);
+    replaceGalleryUrl(pathname, next);
+  }
+
   function openPhoto(id: string) {
     const next = getCurrentSearchParams();
     next.set("photo", id);
     openedViaClickRef.current = true;
     pushGalleryUrl(pathname, next);
+  }
+
+  function navigatePhoto(id: string) {
+    const next = getCurrentSearchParams();
+    next.set("photo", id);
+    replaceGalleryUrl(pathname, next);
   }
 
   function closePhoto() {
@@ -207,59 +213,77 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
     replaceGalleryUrl(pathname, next);
   }
 
+  function goPrev() {
+    if (navIndex < 0 || filtered.length === 0) return;
+    const n = (navIndex - 1 + filtered.length) % filtered.length;
+    navigatePhoto(filtered[n].id);
+  }
+
+  function goNext() {
+    if (navIndex < 0 || filtered.length === 0) return;
+    const n = (navIndex + 1) % filtered.length;
+    navigatePhoto(filtered[n].id);
+  }
+
   return (
     <>
-      <div className="mt-8 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:flex-wrap sm:overflow-visible">
-        <button
-          type="button"
-          onClick={() => setTag(null)}
-          aria-pressed={!selectedTag}
-          className={[
-            "liquid-glass liquid-glass--premium shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
-            !selectedTag ? "liquid-glass--active text-foreground" : "text-foreground/85 hover:text-foreground",
-          ].join(" ")}
-        >
-          All
-        </button>
-        {tags.map((tag) => {
-          const active = selectedTag === tag;
-          return (
-            <button
-              key={tag}
-              type="button"
-              onClick={() => setTag(tag)}
-              aria-pressed={active}
-              className={[
-                "liquid-glass liquid-glass--premium shrink-0 whitespace-nowrap rounded-full px-3 py-1.5 text-xs transition",
-                active ? "liquid-glass--active text-foreground" : "text-foreground/85 hover:text-foreground",
-              ].join(" ")}
-            >
-              {formatTag(tag)}
-            </button>
-          );
-        })}
-      </div>
-
-      {filtered.length === 0 ? (
-        <div className="mt-14 rounded-2xl border border-[rgb(var(--border)/0.10)] bg-[rgb(var(--background)/0.35)] px-5 py-6 text-sm text-muted backdrop-blur-md">
-          No photos found. Try choosing a different tag.
+      <div className="mt-10 flex flex-col gap-5 border-t border-rule pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap gap-2">
           <button
             type="button"
             onClick={() => setTag(null)}
-            className={[
-              "liquid-glass liquid-glass--premium mt-5 inline-flex items-center justify-center rounded-full px-4 py-2 text-xs transition",
-              "text-foreground/90 hover:text-foreground",
-              "transform-gpu hover:-translate-y-0.5 motion-reduce:transform-none",
-            ].join(" ")}
+            aria-pressed={!selectedTag}
+            data-active={!selectedTag}
+            data-all="true"
+            className="u-tag"
           >
-            Clear filter
+            All
+          </button>
+          {tags.map((tag) => {
+            const active = selectedTag === tag;
+            return (
+              <button
+                key={tag}
+                type="button"
+                onClick={() => setTag(tag)}
+                aria-pressed={active}
+                data-active={active}
+                className="u-tag"
+              >
+                {formatTag(tag)}
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="flex items-center justify-between gap-4 sm:justify-end">
+          <span aria-live="polite" className="u-label u-tabular">
+            {pad2(filtered.length)} / {pad2(photos.length)}
+          </span>
+          <GalleryViewToggle view={view} onChange={setView} />
+        </div>
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="mt-12 flex flex-wrap items-center gap-4 border border-rule p-6">
+          <span className="u-label text-mute">
+            No photographs match this tag.
+          </span>
+          <button
+            type="button"
+            onClick={() => setTag(null)}
+            className="u-link u-label text-ink"
+          >
+            Clear filter ↗
           </button>
         </div>
       ) : (
-        <GalleryMasonry
+        <GalleryBody
           key={selectedTag ?? "all"}
           photos={filtered}
-          onSelectPhoto={openPhoto}
+          numberById={numberById}
+          view={view}
+          onSelect={openPhoto}
         />
       )}
 
@@ -267,8 +291,11 @@ export function GallerySectionClient({ photos }: { photos: Photo[] }) {
         photo={selectedPhoto}
         open={Boolean(selectedPhoto)}
         onClose={closePhoto}
+        onPrev={goPrev}
+        onNext={goNext}
+        index={navIndex >= 0 ? navIndex + 1 : 0}
+        total={filtered.length}
       />
     </>
   );
 }
-
