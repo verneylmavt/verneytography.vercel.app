@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { site } from "@/content/site";
 import { HashtagLabel } from "@/components/primitives/hashtag-label";
+import { HeadingReveal } from "@/components/primitives/heading-reveal";
 import { Reveal } from "@/components/primitives/reveal";
 
 export function AboutSection() {
@@ -30,19 +31,19 @@ export function AboutSection() {
           </Reveal>
 
           <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-            <Reveal>
-              <h2 className="u-display text-h1 max-w-[14ch]">
-                {site.about.heading}
-              </h2>
-            </Reveal>
+            <HeadingReveal
+              as="h2"
+              text={site.about.heading}
+              className="u-display text-h1 max-w-[14ch]"
+            />
 
-            <Reveal delay={0.05}>
-              <div className="mt-7 space-y-4 text-[0.875rem] leading-[1.65] text-ink md:text-[1rem] md:leading-[1.55]">
-                {site.about.body.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
-            </Reveal>
+            <div className="mt-7 space-y-4 text-[0.875rem] leading-[1.65] text-ink md:text-[1rem] md:leading-[1.55]">
+              {site.about.body.map((paragraph, index) => (
+                <Reveal key={index} delay={0.05 + index * 0.06}>
+                  <p>{paragraph}</p>
+                </Reveal>
+              ))}
+            </div>
 
             <Reveal delay={0.1}>
               <p className="u-label mt-8">— {site.hero.name}</p>

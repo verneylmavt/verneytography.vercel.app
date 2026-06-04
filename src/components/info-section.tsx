@@ -49,21 +49,20 @@ export function InfoSection() {
       <div className="u-shell py-20 sm:py-28">
         <HashtagLabel index="05" label="Info" />
 
-        <Reveal>
-          <dl className="mt-10 border-t border-rule">
-            {rows.map((row) => (
-              <div
-                key={row.term}
-                className="u-grid items-baseline border-b border-rule py-5"
-              >
-                <dt className="u-label col-span-12 sm:col-span-3">{row.term}</dt>
-                <dd className="col-span-12 mt-1 text-[0.875rem] leading-[1.55] text-ink sm:col-span-9 sm:mt-0 md:text-[1rem]">
-                  {row.value}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
+        <dl className="mt-10 border-t border-rule">
+          {rows.map((row, i) => (
+            <Reveal
+              key={row.term}
+              delay={i * 0.05}
+              className="u-grid items-baseline border-b border-rule py-5"
+            >
+              <dt className="u-label col-span-12 sm:col-span-3">{row.term}</dt>
+              <dd className="col-span-12 mt-1 text-[0.875rem] leading-[1.55] text-ink sm:col-span-9 sm:mt-0 md:text-[1rem]">
+                {row.value}
+              </dd>
+            </Reveal>
+          ))}
+        </dl>
       </div>
     </section>
   );

@@ -90,17 +90,19 @@ function GalleryBody({
 
       {hasMore ? (
         <div className="mt-10 flex justify-center">
-          <button
+          <motion.button
             type="button"
             onClick={() =>
               setVisibleCount((count) =>
                 Math.min(count + PAGE_SIZE, photos.length),
               )
             }
+            whileHover={reduce ? undefined : { y: -2 }}
+            whileTap={reduce ? undefined : { y: 0 }}
             className="u-label border border-rule px-5 py-3 text-ink transition-colors hover:border-ink hover:text-red"
           >
             [ Load {nextChunk} more ]
-          </button>
+          </motion.button>
         </div>
       ) : null}
     </div>

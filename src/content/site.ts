@@ -31,12 +31,12 @@ export const site = {
   },
   marquee: {
     primary: [
-      "Verneytography",
-      "Photography",
+      "verneytography",
+      "Hobbyist Photography",
+      "Surabaya",
       "Jakarta",
-      "Available Light",
-      "2018 — 2019",
-      "No Studio",
+      "Singapore",
+      "Est. 2017",
     ],
     divider: ["Selected Work", "Index 01 — 17", "Scroll"],
   },

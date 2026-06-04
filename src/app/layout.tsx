@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { site } from "@/content/site";
 import { ScrollToTopOnReload } from "@/components/scroll-to-top-on-reload";
+import { GrainBackground } from "@/components/effects/grain-background";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -44,6 +45,7 @@ export default function RootLayout({
           })();
         `}</Script>
         <ScrollToTopOnReload />
+        <GrainBackground className="u-grain" />
         {children}
       </body>
     </html>

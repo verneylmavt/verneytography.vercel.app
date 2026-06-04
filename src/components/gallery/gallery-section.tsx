@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import type { Photo } from "@/lib/types";
 import { HashtagLabel } from "@/components/primitives/hashtag-label";
+import { HeadingReveal } from "@/components/primitives/heading-reveal";
 
 import { pad2 } from "./format";
 import { GallerySectionClient } from "./gallery-section-client";
@@ -33,7 +34,11 @@ export function GallerySection({ photos }: { photos: Photo[] }) {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <HashtagLabel index="04" label="Selected Works" />
-            <h2 className="u-display text-h1 mt-4 leading-[1.0] tracking-[-0.01em]">Works</h2>
+            <HeadingReveal
+              as="h2"
+              text="Works"
+              className="u-display text-h1 mt-4 leading-[1.0] tracking-[-0.01em]"
+            />
           </div>
           <span className="u-label u-tabular">
             [ {pad2(photos.length)} Frames ]

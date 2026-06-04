@@ -9,6 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { animate, stagger } from "animejs";
 
 import { site } from "@/content/site";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -131,6 +132,23 @@ export function Header() {
       window.removeEventListener("pointerdown", handlePointerDown);
     };
   }, [mobileMenuOpen]);
+
+  // Subtle on-load slide-in for the desktop nav links (Anime.js). Slide only
+  // (no opacity) so links stay visible without JS and there's no flash.
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const links = nav.querySelectorAll("a");
+    if (!links.length) return;
+    const anim = animate(links, {
+      translateY: [-8, 0],
+      duration: 500,
+      delay: stagger(45, { start: 150 }),
+      ease: "out(3)",
+    });
+    return () => anim.pause();
+  }, []);
 
   return (
     <header

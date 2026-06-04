@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { site } from "@/content/site";
 import { HashtagLabel } from "@/components/primitives/hashtag-label";
+import { HeadingReveal } from "@/components/primitives/heading-reveal";
+import { AnimatedHairline } from "@/components/primitives/animated-hairline";
 import { Reveal } from "@/components/primitives/reveal";
 
 function isHttpUrl(value: string): boolean {
@@ -37,9 +39,12 @@ export function ContactSection() {
       <div className="u-shell py-20 sm:py-28">
         <HashtagLabel index="06" label="Contact" />
 
-        <Reveal>
-          <h2 className="u-display text-h1 mt-6 max-w-[12ch]">Get in touch</h2>
-        </Reveal>
+        <HeadingReveal
+          as="h2"
+          text="Get in touch"
+          className="u-display text-h1 mt-6 max-w-[12ch]"
+        />
+        <AnimatedHairline className="mt-5 h-px w-24 max-w-full" />
         <Reveal delay={0.05}>
           <p className="mt-6 max-w-xl text-[0.875rem] leading-[1.55] text-ink md:text-[1rem]">
             Open to commissions, collaborations, and conversations about light.
@@ -75,17 +80,19 @@ export function ContactSection() {
           })}
         </div>
 
-        <footer className="u-grid mt-16 items-center gap-y-3 border-t border-rule pt-8">
-          <p className="u-label col-span-12 sm:col-span-4">
-            © {year} {site.brand}
-          </p>
-          <p className="u-label col-span-12 text-center text-mute sm:col-span-4">
-            Built with Next.js · Vercel
-          </p>
-          <p className="u-label col-span-12 text-left sm:col-span-4 sm:text-right">
-            <span className="text-red">v2.0</span> · Swiss Edition
-          </p>
-        </footer>
+        <Reveal>
+          <footer className="u-grid mt-16 items-center gap-y-3 border-t border-rule pt-8">
+            <p className="u-label col-span-12 sm:col-span-4">
+              © {year} {site.brand}
+            </p>
+            <p className="u-label col-span-12 text-center text-mute sm:col-span-4">
+              Built with Next.js · Vercel
+            </p>
+            <p className="u-label col-span-12 text-left sm:col-span-4 sm:text-right">
+              <span className="text-red">v2.0</span> · Swiss Edition
+            </p>
+          </footer>
+        </Reveal>
       </div>
     </section>
   );
