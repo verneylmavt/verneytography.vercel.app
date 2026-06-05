@@ -159,13 +159,13 @@ export function HeroSection() {
               <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-red" />
               {site.hero.tagline}
             </span>
-            <p className="u-label mt-4">
+            {/* <p className="u-label mt-4">
               Photographer
               <span className="u-slash mx-1.5">/</span>
               {site.hero.location}
               <span className="u-slash mx-1.5">/</span>
               <span className="u-tabular">2018—2019</span>
-            </p>
+            </p> */}
 
             <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
               {socials.map((social) => {
