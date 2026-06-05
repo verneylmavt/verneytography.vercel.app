@@ -147,7 +147,9 @@ export function Header() {
       delay: stagger(45, { start: 150 }),
       ease: "out(3)",
     });
-    return () => anim.pause();
+    return () => {
+      anim.pause();
+    };
   }, []);
 
   return (
