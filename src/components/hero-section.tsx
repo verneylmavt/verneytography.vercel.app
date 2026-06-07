@@ -30,7 +30,7 @@ const socials = [
 const metaRows = [
   { label: "Location", value: site.hero.location },
   { label: "Coordinates", value: site.hero.coords },
-  { label: "Years", value: site.info.years },
+  { label: "From", value: '2017' },
 ];
 
 // Per-character accent map (matches v3): VER · NEYLMAV · T render red.
@@ -137,14 +137,15 @@ export function HeroSection() {
 
       <div className="u-shell flex min-h-0 flex-1 flex-col py-16 sm:py-20">
         <div className="grid flex-1 gap-y-12 md:grid-cols-12 md:gap-x-6">
-          {/* Left column — intro label, name, tagline, links */}
+          {/* Entire Left column — intro label, name, tagline, links */}
           <div className="flex min-w-0 flex-col md:col-span-8 md:pt-2">
             <div ref={topStripRef} style={{ opacity: 0 }}>
               <HashtagLabel index="00" label="Intro" />
             </div>
 
-            <div className="flex flex-col pt-8 sm:pt-10">
-            <h1 className="font-medium tracking-[-0.025em] uppercase leading-[0.9] text-[clamp(2.25rem,10vw,7rem)]">
+            <div className="flex flex-col pt-8 sm:pt-2.5">
+              
+            <h1 className="font-medium tracking-[-0.025em] uppercase leading-[0.9] text-[clamp(2.75rem,16vw,8rem)]">
               {site.hero.nameLines.map((line, li) => (
                 <span
                   key={line}

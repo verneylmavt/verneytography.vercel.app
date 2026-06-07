@@ -33,7 +33,7 @@ export function ViewfinderOverlay({ className = "" }: { className?: string }) {
       </span>
 
       {/* REC tag (tucked inside the top-left bracket) */}
-      <span className="u-label absolute left-2.5 top-2 flex items-center gap-1.5 text-mute">
+      <span className="u-label absolute left-4.5 top-4 flex items-center gap-1.5 text-mute">
         <span className="u-rec-dot h-2 w-2 rounded-full bg-red" />
         REC
       </span>
