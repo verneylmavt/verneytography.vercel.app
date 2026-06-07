@@ -19,7 +19,7 @@ export function StatsSection() {
     { label: "Bodies", value: 2, pad: 2 },
     { label: "Lenses", value: 3, pad: 2 },
     { label: "Years", value: years, pad: 2 },
-    { label: "Photographs", value: 10.5, decimals: 1, suffix: "k" },
+    { label: "Photographs", value: 35.5, decimals: 1, suffix: "k" },
     { label: "Memories", display: "∞" },
   ];
 

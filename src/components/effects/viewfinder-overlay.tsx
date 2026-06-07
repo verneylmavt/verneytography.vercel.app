@@ -20,10 +20,10 @@ export function ViewfinderOverlay({ className = "" }: { className?: string }) {
       <span className={`${corner} bottom-0 right-0 border-b-2 border-r-2`} />
 
       {/* Rule-of-thirds guides */}
-      <span className="absolute inset-y-0 left-1/3 w-px bg-[rgb(var(--rule)/0.45)]" />
-      <span className="absolute inset-y-0 left-2/3 w-px bg-[rgb(var(--rule)/0.45)]" />
-      <span className="absolute inset-x-0 top-1/3 h-px bg-[rgb(var(--rule)/0.45)]" />
-      <span className="absolute inset-x-0 top-2/3 h-px bg-[rgb(var(--rule)/0.45)]" />
+      <span className="absolute inset-y-0 left-5/12 w-px bg-[rgb(var(--rule)/0.45)]" />
+      <span className="absolute inset-y-0 left-7/12 w-px bg-[rgb(var(--rule)/0.45)]" />
+      <span className="absolute inset-x-0 top-5/12 h-px bg-[rgb(var(--rule)/0.45)]" />
+      <span className="absolute inset-x-0 top-7/12 h-px bg-[rgb(var(--rule)/0.45)]" />
 
       {/* Centre reticle */}
       <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">

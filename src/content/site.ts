@@ -28,7 +28,7 @@ export const site = {
       "A photograph may arrest a single moment in time, but it never confines the story. Every frame bears the imprint of what came before and the possibility of what follows after.",
       'These photographs are fragments of those unseen narratives."',
     ],
-    portraitSrc: "/1.jpg", // TODO: replace with a real portrait
+    portraitSrc: "/elvern-neylmav-t.jpg", // TODO: replace with a real portrait
     portraitAlt: "Elvern Neylmav Tanny",
   },
   marquee: {
