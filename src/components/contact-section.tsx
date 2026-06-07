@@ -1,9 +1,14 @@
 import Link from "next/link";
 
 import { site } from "@/content/site";
+import {
+  InstagramIcon,
+  LinkedInIcon,
+  MailIcon,
+} from "@/components/icons";
+import { AnimatedHairline } from "@/components/primitives/animated-hairline";
 import { HashtagLabel } from "@/components/primitives/hashtag-label";
 import { HeadingReveal } from "@/components/primitives/heading-reveal";
-import { AnimatedHairline } from "@/components/primitives/animated-hairline";
 import { Reveal } from "@/components/primitives/reveal";
 
 function isHttpUrl(value: string): boolean {
@@ -26,9 +31,9 @@ function displayHandle(label: string, href: string): string {
 }
 
 const links = [
-  { label: "Email", href: site.contact.email },
-  { label: "LinkedIn", href: site.contact.linkedin },
-  { label: "Instagram", href: site.contact.instagram },
+  { label: "Email", href: site.contact.email, Icon: MailIcon },
+  { label: "LinkedIn", href: site.contact.linkedin, Icon: LinkedInIcon },
+  { label: "Instagram", href: site.contact.instagram, Icon: InstagramIcon },
 ];
 
 export function ContactSection() {
@@ -42,17 +47,18 @@ export function ContactSection() {
         <HeadingReveal
           as="h2"
           text="Let's talk"
+          redWords={[1]}
           className="u-display text-h1 mt-6 max-w-[12ch]"
         />
-        <AnimatedHairline className="mt-5 h-px w-24 max-w-full" />
+        <AnimatedHairline className="mt-5 h-px w-40 max-w-full" />
         <Reveal delay={0.05}>
           <p className="mt-6 max-w-xl text-[0.875rem] leading-[1.55] text-ink md:text-[1rem]">
-            Open to commissions, collaborations, and conversations about light.
+            Let's collaborate and build something meaningful.
           </p>
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-3">
-          {links.map((link) => {
+          {links.map((link, i) => {
             const http = isHttpUrl(link.href);
             return (
               <Link
@@ -60,7 +66,7 @@ export function ContactSection() {
                 href={link.href}
                 target={http ? "_blank" : undefined}
                 rel={http ? "noopener noreferrer" : undefined}
-                className="group relative block overflow-hidden bg-paper p-6 sm:p-8"
+                className="group relative block overflow-hidden bg-paper p-4 sm:p-8"
               >
                 <span
                   aria-hidden
@@ -68,8 +74,16 @@ export function ContactSection() {
                 />
                 <span className="relative z-10 flex h-full flex-col justify-between gap-12">
                   <span className="flex items-center justify-between text-[0.6875rem] uppercase tracking-[0.06em] text-mute transition-colors group-hover:text-paper group-focus-visible:text-paper">
-                    <span>{link.label}</span>
-                    <span aria-hidden>↗</span>
+                    <span className="flex items-center gap-2">
+                      <link.Icon size={14} className="shrink-0" />
+                      {link.label}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <span className="u-tabular">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span aria-hidden>↗</span>
+                    </span>
                   </span>
                   <span className="break-words text-[0.875rem] text-ink transition-colors group-hover:text-paper group-focus-visible:text-paper md:text-[1rem]">
                     {displayHandle(link.label, link.href)}
@@ -82,7 +96,8 @@ export function ContactSection() {
 
         <Reveal>
           <footer className="u-grid mt-16 items-center gap-y-3 border-t border-rule pt-8">
-            <p className="u-label col-span-12 sm:col-span-4">
+            <p className="u-label col-span-12 flex items-center gap-2 sm:col-span-4">
+              <span aria-hidden className="inline-block h-1.5 w-1.5 bg-red" />
               ©{site.brand}
             </p>
             <p className="u-label col-span-12 text-center text-mute sm:col-span-4">

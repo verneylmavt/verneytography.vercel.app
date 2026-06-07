@@ -45,7 +45,7 @@ export function AboutSection() {
               >
                 “
               </span>
-              <div className="space-y-4 text-[0.875rem] leading-[1.65] text-ink md:text-[1rem] md:leading-[1.55]">
+              <div className="space-y-4 text-[0.875rem] italic leading-[1.65] text-ink md:text-[1rem] md:leading-[1.55]">
                 {site.about.body.map((paragraph, index) => {
                   let text: string = paragraph;
                   if (index === 0) text = text.replace(/^"/, "");
