@@ -29,8 +29,7 @@ const socials = [
 
 const metaRows = [
   { label: "Location", value: site.hero.location },
-  { label: "Coordinates", value: site.hero.coords },
-  { label: "From", value: '2017' },
+  { label: "Since", value: '2017' },
 ];
 
 // Per-character accent map (matches v3): VER · NEYLMAV · T render red.

@@ -83,13 +83,13 @@ export function ContactSection() {
         <Reveal>
           <footer className="u-grid mt-16 items-center gap-y-3 border-t border-rule pt-8">
             <p className="u-label col-span-12 sm:col-span-4">
-              © {year} {site.brand}
+              ©{site.brand}
             </p>
             <p className="u-label col-span-12 text-center text-mute sm:col-span-4">
-              Built with Next.js · Vercel
+              Built w/ Next.js 15
             </p>
             <p className="u-label col-span-12 text-left sm:col-span-4 sm:text-right">
-              <span className="text-red">v2.0</span> · Swiss Edition
+              Swiss Design
             </p>
           </footer>
         </Reveal>
