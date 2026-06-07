@@ -115,18 +115,18 @@ html.theme-ready body {
   padding-inline: clamp(1.25rem, 5vw, 5rem);
 }
 
-/* Global film-grain overlay (canvas painted by GrainBackground) */
-.u-grain {
+/* Global golden-ratio grid overlay (canvas painted by GoldenGridBackground) */
+.u-gridbg {
   position: fixed;
   inset: 0;
   z-index: -10;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.08;
 }
-html[data-theme="dark"] .u-grain {
-  opacity: 0.07;
+html[data-theme="dark"] .u-gridbg {
+  opacity: 0.12;
 }
 
 .u-grid {
@@ -242,10 +242,6 @@ html[data-theme="dark"] .u-grain {
   width: max-content;
   animation: marquee var(--marquee-duration, 30s) linear infinite;
 }
-.u-marquee:hover .u-marquee-track {
-  animation-play-state: paused;
-}
-
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -297,6 +293,108 @@ html[data-theme="dark"] .u-grain {
 }
 
 /* ---------------------------------------------------------------
+   Shutter wipe (theme toggle), film strip, viewfinder pulses
+   --------------------------------------------------------------- */
+
+/* Full-screen camera shutter that closes then opens on theme change. */
+@keyframes tsTop {
+  0% {
+    transform: translateY(-101%);
+  }
+  45%,
+  55% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-101%);
+  }
+}
+@keyframes tsBottom {
+  0% {
+    transform: translateY(101%);
+  }
+  45%,
+  55% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(101%);
+  }
+}
+.theme-shutter {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  pointer-events: none;
+}
+.theme-shutter span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: rgb(var(--ink));
+}
+.theme-shutter .ts-blade-top {
+  top: 0;
+  transform: translateY(-101%);
+  border-bottom: 2px solid rgb(var(--red));
+  animation: tsTop 480ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.theme-shutter .ts-blade-bottom {
+  bottom: 0;
+  transform: translateY(101%);
+  border-top: 2px solid rgb(var(--red));
+  animation: tsBottom 480ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Film strip — sprocket perforations top & bottom of a scrolling band.
+   Theme-matched: light band/dark text in light mode, dark band/light text in
+   dark mode (follows the page via tokens). A faint tint + rules keep the band
+   distinct from the page. */
+.u-filmstrip {
+  background: rgb(var(--paper));
+  color: rgb(var(--ink));
+}
+.u-sprockets {
+  height: 9px;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgb(var(--ink)) 0,
+    rgb(var(--ink)) 8px,
+    transparent 8px,
+    transparent 20px
+  );
+}
+
+/* Viewfinder reticle + REC blink (opacity only — no transform clash) */
+.u-reticle {
+  animation: reticlePulse 3.6s ease-in-out infinite;
+}
+@keyframes reticlePulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+.u-rec-dot {
+  animation: recBlink 1.8s steps(1, end) infinite;
+}
+@keyframes recBlink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+/* ---------------------------------------------------------------
    Reduced motion — global kill switch (opacity still allowed)
    --------------------------------------------------------------- */
 
@@ -316,12 +414,20 @@ html[data-theme="dark"] .u-grain {
     animation: none !important;
     transform: none !important;
   }
+  .theme-shutter {
+    display: none !important;
+  }
   [data-hero-char] {
     opacity: 1 !important;
     transform: none !important;
   }
   .hero-char {
     transition: none;
+  }
+  .hero-tagline,
+  .hero-tagline-focus {
+    animation: none !important;
+    filter: none !important;
   }
 }
 
@@ -335,5 +441,42 @@ html[data-theme="dark"] .u-grain {
 }
 .hero-char:hover {
   transform: translateY(-0.12em);
+}
+
+/* Tagline "focus pull" — develops from blurred + spaced to sharp on load. */
+.hero-tagline {
+  animation: taglineFocus 1000ms cubic-bezier(0.22, 1, 0.36, 1) 550ms both;
+}
+/* Hover = lens re-focus: the text hunts out of focus then snaps back sharp.
+   Lives on a nested span so it never fights the load animation's fill state. */
+.hero-tagline-focus {
+  display: inline-block;
+  will-change: filter;
+}
+.hero-tagline-focus:hover {
+  animation: refocus 700ms ease;
+}
+@keyframes refocus {
+  0% {
+    filter: blur(0);
+  }
+  28% {
+    filter: blur(3px);
+  }
+  100% {
+    filter: blur(0);
+  }
+}
+@keyframes taglineFocus {
+  from {
+    filter: blur(8px);
+    opacity: 0;
+    letter-spacing: 0.14em;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    letter-spacing: -0.01em;
+  }
 }
 

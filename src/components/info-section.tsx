@@ -47,7 +47,7 @@ export function InfoSection() {
   return (
     <section id="info" className="u-rule-t scroll-mt-24">
       <div className="u-shell py-20 sm:py-28">
-        <HashtagLabel index="05" label="Info" />
+        <HashtagLabel index="04" label="Info" />
 
         <dl className="mt-10 border-t border-rule">
           {rows.map((row, i) => (

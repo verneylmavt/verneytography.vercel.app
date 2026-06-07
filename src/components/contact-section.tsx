@@ -37,11 +37,11 @@ export function ContactSection() {
   return (
     <section id="contact" className="u-rule-t scroll-mt-24">
       <div className="u-shell py-20 sm:py-28">
-        <HashtagLabel index="06" label="Contact" />
+        <HashtagLabel index="05" label="Contact" />
 
         <HeadingReveal
           as="h2"
-          text="Get in touch"
+          text="Let's talk"
           className="u-display text-h1 mt-6 max-w-[12ch]"
         />
         <AnimatedHairline className="mt-5 h-px w-24 max-w-full" />

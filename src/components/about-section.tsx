@@ -9,7 +9,7 @@ export function AboutSection() {
   return (
     <section id="about" className="u-rule-t scroll-mt-24">
       <div className="u-shell py-20 sm:py-28">
-        <HashtagLabel index="02" label="About" />
+        <HashtagLabel index="01" label="About" />
 
         <div className="u-grid mt-10 items-start gap-y-12">
           <Reveal className="col-span-12 lg:col-span-5">

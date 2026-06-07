@@ -5,7 +5,7 @@ import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
 import { InfoSection } from "@/components/info-section";
 import { StatsSection, type Stats } from "@/components/stats-section";
-import { Marquee } from "@/components/primitives/marquee";
+import { FilmStrip } from "@/components/primitives/film-strip";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { GALLERY_PHOTO_ID_ORDER } from "@/content/photo-order";
 import { site } from "@/content/site";
@@ -83,11 +83,11 @@ export default function Home() {
 
       <main>
         <HeroSection />
-        <Marquee items={site.marquee.primary} />
+        <FilmStrip items={site.marquee.primary} />
         <AboutSection />
         <StatsSection stats={stats} />
         <GallerySection photos={photos} />
-        <Marquee items={site.marquee.divider} reverse />
+        <FilmStrip items={site.marquee.divider} reverse />
         <InfoSection />
         <ContactSection />
       </main>

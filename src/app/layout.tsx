@@ -5,7 +5,8 @@ import "./globals.css";
 
 import { site } from "@/content/site";
 import { ScrollToTopOnReload } from "@/components/scroll-to-top-on-reload";
-import { GrainBackground } from "@/components/effects/grain-background";
+import { GoldenGridBackground } from "@/components/effects/golden-grid-background";
+import { ShutterTransition } from "@/components/effects/shutter-transition";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -45,7 +46,8 @@ export default function RootLayout({
           })();
         `}</Script>
         <ScrollToTopOnReload />
-        <GrainBackground className="u-grain" />
+        <GoldenGridBackground className="u-gridbg" />
+        <ShutterTransition />
         {children}
       </body>
     </html>

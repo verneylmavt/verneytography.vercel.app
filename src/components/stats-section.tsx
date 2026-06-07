@@ -23,7 +23,7 @@ export function StatsSection({ stats }: { stats: Stats }) {
   return (
     <section id="stats" className="u-rule-t scroll-mt-24">
       <div className="u-shell py-20 sm:py-28">
-        <HashtagLabel index="03" label="By the numbers" />
+        <HashtagLabel index="02" label="By the numbers" />
 
         <div className="mt-10 grid grid-cols-2 gap-px border border-rule bg-rule md:grid-cols-5">
           {cells.map((cell, i) => (

@@ -9,6 +9,8 @@ export const site = {
     nameLines: ["Elvern", "Neylmav", "Tanny"],
     tagline: "Hobbyist Photographer",
     statement: "A hobbyist photographer working in available light.",
+    // Decorative camera readouts for the viewfinder-framed tagline.
+    viewfinder: { aperture: "f/1.8", shutter: "1/250", iso: "ISO 100" },
   },
   contact: {
     email: "mailto:elvernneylmav@gmail.com",
