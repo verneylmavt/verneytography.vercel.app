@@ -11,7 +11,7 @@ export function ViewfinderOverlay({ className = "" }: { className?: string }) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none absolute inset-3 sm:inset-5 ${className}`}
+      className={`pointer-events-none absolute inset-3 sm:inset-5 -z-10 ${className}`}
     >
       {/* Corner crop brackets */}
       <span className={`${corner} left-0 top-0 border-l-2 border-t-2`} />
@@ -19,14 +19,14 @@ export function ViewfinderOverlay({ className = "" }: { className?: string }) {
       <span className={`${corner} bottom-0 left-0 border-b-2 border-l-2`} />
       <span className={`${corner} bottom-0 right-0 border-b-2 border-r-2`} />
 
-      {/* Rule-of-thirds guides */}
-      <span className="absolute inset-y-0 left-5/12 w-px bg-[rgb(var(--rule)/0.45)]" />
-      <span className="absolute inset-y-0 left-7/12 w-px bg-[rgb(var(--rule)/0.45)]" />
-      <span className="absolute inset-x-0 top-5/12 h-px bg-[rgb(var(--rule)/0.45)]" />
-      <span className="absolute inset-x-0 top-7/12 h-px bg-[rgb(var(--rule)/0.45)]" />
+      {/* Rule-of-thirds guides — hidden on mobile */}
+      <span className="absolute inset-y-0 left-5/12 hidden w-px bg-[rgb(var(--rule)/0.45)] sm:block" />
+      <span className="absolute inset-y-0 left-7/12 hidden w-px bg-[rgb(var(--rule)/0.45)] sm:block" />
+      <span className="absolute inset-x-0 top-5/12 hidden h-px bg-[rgb(var(--rule)/0.45)] sm:block" />
+      <span className="absolute inset-x-0 top-7/12 hidden h-px bg-[rgb(var(--rule)/0.45)] sm:block" />
 
-      {/* Centre reticle */}
-      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      {/* Centre reticle — hidden on mobile */}
+      <span className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 sm:block">
         <span className="absolute left-1/2 top-1/2 h-5 w-px -translate-x-1/2 -translate-y-1/2 bg-[rgb(var(--mute)/0.6)]" />
         <span className="absolute left-1/2 top-1/2 h-px w-5 -translate-x-1/2 -translate-y-1/2 bg-[rgb(var(--mute)/0.6)]" />
         <span className="u-reticle absolute left-1/2 top-1/2 block h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgb(var(--mute)/0.4)]" />
