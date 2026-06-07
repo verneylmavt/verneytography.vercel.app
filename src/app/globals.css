@@ -440,7 +440,7 @@ html[data-theme="dark"] .u-gridbg {
   transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .hero-char:hover {
-  transform: translateY(-0.12em);
+  transform: translateY(-0.075em);
 }
 
 /* Tagline "focus pull" — develops from blurred + spaced to sharp on load. */

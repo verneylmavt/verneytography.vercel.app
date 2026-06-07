@@ -37,7 +37,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="u-rule-t scroll-mt-24">
       <div className="u-shell py-20 sm:py-28">
-        <HashtagLabel index="05" label="Contact" />
+        <HashtagLabel index="05" label="reach me" />
 
         <HeadingReveal
           as="h2"

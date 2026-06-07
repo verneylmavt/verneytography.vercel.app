@@ -33,7 +33,7 @@ export function GallerySection({ photos }: { photos: Photo[] }) {
       <div className="u-shell py-20 sm:py-28">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <HashtagLabel index="03" label="Works" />
+            <HashtagLabel index="03" label="my prouds" />
             <HeadingReveal
               as="h2"
               text="Works"

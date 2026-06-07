@@ -140,7 +140,7 @@ export function HeroSection() {
           {/* Entire Left column — intro label, name, tagline, links */}
           <div className="flex min-w-0 flex-col md:col-span-8 md:pt-2">
             <div ref={topStripRef} style={{ opacity: 0 }}>
-              <HashtagLabel index="00" label="Intro" />
+              <HashtagLabel index="00" label="i'm" />
             </div>
 
             <div className="flex flex-col pt-8 sm:pt-2.5">
