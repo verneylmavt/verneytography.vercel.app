@@ -10,7 +10,7 @@ export const site = {
     tagline: "Hobbyist Photographer",
     statement: "A hobbyist photographer working in available light.",
     // Decorative camera readouts for the viewfinder-framed tagline.
-    viewfinder: { aperture: "f/1.8", shutter: "1/250", iso: "ISO 100" },
+    viewfinder: { aperture: "f/1.8", shutter: "1/500", iso: "ISO 100" },
   },
   contact: {
     email: "mailto:elvernneylmav@gmail.com",
@@ -49,6 +49,15 @@ export const site = {
       "Sony A6400",
       "FE 50mm F1.8",
       "FE 28–70mm F3.5–5.6",
+    ],
+    body: [
+      "Sony A7 II",
+      "Sony A6400",
+    ],
+    lens: [
+      "FE 28–70mm F3.5–5.6",
+      "FE 50mm F1.8",
+      "FE 85mm F1.8",
     ],
     years: "2018 — 2019",
     builtWith: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP", "Motion"],

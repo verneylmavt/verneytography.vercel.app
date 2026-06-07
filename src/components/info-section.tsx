@@ -6,12 +6,12 @@ type Row = { term: string; value: React.ReactNode };
 
 export function InfoSection() {
   const rows: Row[] = [
-    { term: "Location", value: site.info.location },
+    // { term: "Location", value: site.info.location },
     {
-      term: "Gear",
+      term: "Body",
       value: (
         <span className="inline-flex flex-wrap gap-x-2 gap-y-1">
-          {site.info.gear.map((item, i) => (
+          {site.info.body.map((item, i) => (
             <span key={item} className="inline-flex items-center gap-2">
               {i > 0 ? (
                 <span aria-hidden className="u-slash">
@@ -24,12 +24,11 @@ export function InfoSection() {
         </span>
       ),
     },
-    { term: "Years", value: <span className="u-tabular">{site.info.years}</span> },
     {
-      term: "Built with",
+      term: "Lens",
       value: (
         <span className="inline-flex flex-wrap gap-x-2 gap-y-1">
-          {site.info.builtWith.map((item, i) => (
+          {site.info.lens.map((item, i) => (
             <span key={item} className="inline-flex items-center gap-2">
               {i > 0 ? (
                 <span aria-hidden className="u-slash">
@@ -42,6 +41,24 @@ export function InfoSection() {
         </span>
       ),
     },
+    // { term: "Years", value: <span className="u-tabular">{site.info.years}</span> },
+    // {
+    //   term: "Built with",
+    //   value: (
+    //     <span className="inline-flex flex-wrap gap-x-2 gap-y-1">
+    //       {site.info.builtWith.map((item, i) => (
+    //         <span key={item} className="inline-flex items-center gap-2">
+    //           {i > 0 ? (
+    //             <span aria-hidden className="u-slash">
+    //               /
+    //             </span>
+    //           ) : null}
+    //           {item}
+    //         </span>
+    //       ))}
+    //     </span>
+    //   ),
+    // },
   ];
 
   return (

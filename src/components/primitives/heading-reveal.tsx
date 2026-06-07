@@ -8,6 +8,8 @@ type HeadingRevealProps = {
   text: string;
   as?: "h1" | "h2" | "h3";
   className?: string;
+  /** Word indices (0-based) to render in the red accent colour. */
+  redWords?: number[];
 };
 
 // Non-breaking space so the gap between inline-block words always renders.
@@ -22,6 +24,7 @@ export function HeadingReveal({
   text,
   as = "h2",
   className = "",
+  redWords,
 }: HeadingRevealProps) {
   const ref = useRef<HTMLHeadingElement>(null);
 
@@ -70,7 +73,7 @@ export function HeadingReveal({
         <span
           key={i}
           data-word
-          className="inline-block"
+          className={`inline-block${redWords?.includes(i) ? " text-red" : ""}`}
           style={{ opacity: 0, transform: "translateY(40%)" }}
         >
           {i < words.length - 1 ? word + NBSP : word}

@@ -99,30 +99,10 @@ export function PhotoLightbox({
               </div>
 
               <div className="min-h-0 w-full overflow-y-auto p-6 sm:p-8 lg:w-[22rem] lg:shrink-0">
-                <div className="u-label flex items-center justify-between">
+                <div className="u-label">
                   <span className="u-tabular text-red">
                     {pad3(index)} / {pad3(total)}
                   </span>
-                  {canNavigate ? (
-                    <span className="inline-flex gap-1">
-                      <button
-                        type="button"
-                        onClick={onPrev}
-                        aria-label="Previous photo"
-                        className="border border-rule px-2 py-1 text-ink transition-colors hover:border-ink hover:text-red"
-                      >
-                        ←
-                      </button>
-                      <button
-                        type="button"
-                        onClick={onNext}
-                        aria-label="Next photo"
-                        className="border border-rule px-2 py-1 text-ink transition-colors hover:border-ink hover:text-red"
-                      >
-                        →
-                      </button>
-                    </span>
-                  ) : null}
                 </div>
 
                 <Dialog.Title className="mt-4 text-lg leading-snug text-ink">
@@ -156,7 +136,26 @@ export function PhotoLightbox({
                   ))}
                 </dl>
 
-                <p className="u-label mt-6 text-mute">{exifSummary(photo)}</p>
+                {canNavigate ? (
+                  <div className="mt-4 flex gap-1">
+                    <button
+                      type="button"
+                      onClick={onPrev}
+                      aria-label="Previous photo"
+                      className="flex-1 border border-rule py-2 text-center text-ink transition-colors hover:border-ink hover:text-red"
+                    >
+                      ←
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onNext}
+                      aria-label="Next photo"
+                      className="flex-1 border border-rule py-2 text-center text-ink transition-colors hover:border-ink hover:text-red"
+                    >
+                      →
+                    </button>
+                  </div>
+                ) : null}
               </div>
             </div>
           ) : null}
