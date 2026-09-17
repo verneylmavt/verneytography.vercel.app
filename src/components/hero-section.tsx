@@ -165,9 +165,9 @@ export function HeroSection() {
               ))}
             </h1>
 
-            <div className="mt-5 max-w-xl sm:mt-10">
+            <div className="mt-5 max-w-xl sm:mt-10 sm:w-fit">
               {/* Viewfinder-framed tagline */}
-          <div className="relative flex w-full max-w-full flex-col gap-2 border border-rule p-3.5 sm:inline-flex sm:w-auto sm:gap-3 sm:p-5">
+              <div className="relative flex w-full max-w-full flex-col gap-2 border border-rule p-3.5 sm:flex sm:w-full sm:gap-3 sm:p-5">
                 <span
                   aria-hidden
                   className="pointer-events-none absolute -left-px -top-px h-3 w-3 border-l-2 border-t-2 border-red"
@@ -211,7 +211,7 @@ export function HeroSection() {
               </div>
 
               {/* Social links — beneath the tagline */}
-              <div className="mt-3.5 flex flex-nowrap items-center gap-1 sm:gap-3">
+              <div className="mt-3.5 flex flex-nowrap items-center gap-1 sm:w-max sm:gap-3">
                 {socials.map((social) => {
                   const http = isHttpUrl(social.href);
                   return (

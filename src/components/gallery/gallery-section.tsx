@@ -30,7 +30,7 @@ function GalleryFallback() {
 export function GallerySection({ photos }: { photos: Photo[] }) {
   return (
     <section id="work" className="u-rule-t scroll-mt-24">
-      <div className="u-shell py-10 sm:py-28">
+      <div className="u-shell py-10 sm:py-20">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <HashtagLabel index="03" label="my prouds" />

@@ -31,7 +31,7 @@ export function GalleryViewToggle({
             className={[
               "u-label px-3 py-2 transition-colors",
               i > 0 ? "border-l border-rule" : "",
-              active ? "bg-ink text-paper" : "text-ink hover:text-red",
+              active ? "bg-ink !text-white" : "text-ink hover:text-red",
             ].join(" ")}
           >
             {option.label}

@@ -41,7 +41,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="u-rule-t scroll-mt-24">
-      <div className="u-shell py-10 sm:py-28">
+      <div className="u-shell py-10 sm:py-20">
         <HashtagLabel index="05" label="reach me" />
 
         <HeadingReveal
@@ -52,7 +52,7 @@ export function ContactSection() {
         />
         <AnimatedHairline className="mt-5 h-px w-40 max-w-full" />
         <Reveal delay={0.05}>
-          <p className="mt-6 max-w-xl text-[0.875rem] leading-[1.55] text-ink md:text-[1rem]">
+          <p className="mt-6 max-w-xl text-[0.75rem] leading-[1.55] text-ink md:text-[0.875rem]">
             Let's collaborate and build something meaningful.
           </p>
         </Reveal>
@@ -85,7 +85,7 @@ export function ContactSection() {
                       <span aria-hidden>↗</span>
                     </span>
                   </span>
-                  <span className="break-words text-[0.75rem] text-ink transition-colors group-hover:text-paper group-focus-visible:text-paper sm:text-[0.875rem] md:text-[1rem]">
+                  <span className="break-words text-[0.75rem] text-ink transition-colors group-hover:text-paper group-focus-visible:text-paper sm:text-[0.875rem] md:text-[0.875rem]">
                     {displayHandle(link.label, link.href)}
                   </span>
                 </span>

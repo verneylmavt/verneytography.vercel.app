@@ -25,7 +25,7 @@ export function StatsSection() {
 
   return (
     <section id="stats" className="u-rule-t scroll-mt-24">
-      <div className="u-shell py-10 sm:py-28">
+      <div className="u-shell py-10 sm:py-20">
         <HashtagLabel index="02" label="my numbers" />
 
         <div className="mt-10 border border-rule bg-rule">

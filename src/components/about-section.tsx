@@ -8,7 +8,7 @@ import { Reveal } from "@/components/primitives/reveal";
 export function AboutSection() {
   return (
     <section id="about" className="u-rule-t scroll-mt-24">
-      <div className="u-shell py-10 sm:py-28">
+      <div className="u-shell py-10 sm:py-20">
         <HashtagLabel index="01" label="myself" />
 
         <div className="u-grid mt-10 items-start gap-y-12">
@@ -35,17 +35,17 @@ export function AboutSection() {
               as="h2"
               text={site.about.heading}
               redWords={[1, 2, 3]}
-              className="u-display text-h1 max-w-[14ch]"
+              className="u-display text-h1 max-w-[14ch] lg:relative lg:-top-8"
             />
 
-            <blockquote className="relative mt-12.5 border-l-2 border-red pl-6 sm:pl-7">
+            <blockquote className="relative mt-12.5 border-l-2 border-red pl-6 sm:pl-7 lg:mt-6">
               <span
                 aria-hidden
                 className="block select-none leading-[0.6] text-red text-[3.25rem] sm:text-[4rem]"
               >
                 “
               </span>
-              <div className="space-y-4 text-[0.875rem] italic leading-[1.65] text-ink md:text-[1rem] md:leading-[1.55]">
+              <div className="space-y-4 text-[0.875rem] italic leading-[1.65] text-ink md:text-[1rem] md:leading-[1.55] lg:space-y-2 lg:leading-[1.45]">
                 {site.about.body.map((paragraph, index) => {
                   let text: string = paragraph;
                   if (index === 0) text = text.replace(/^"/, "");
@@ -60,7 +60,7 @@ export function AboutSection() {
               </div>
 
               <Reveal delay={0.1}>
-                <cite className="u-label mt-5 block not-italic">
+                <cite className="u-label mt-5 block not-italic lg:mt-3">
                   <span className="text-red">—</span> {site.hero.name}
                 </cite>
               </Reveal>

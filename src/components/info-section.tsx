@@ -27,7 +27,7 @@ export function InfoSection() {
 
   return (
     <section id="info" className="u-rule-t scroll-mt-24">
-      <div className="u-shell py-10 sm:py-28">
+      <div className="u-shell py-10 sm:py-20">
         <HashtagLabel index="04" label="my weapons" />
 
         <HeadingReveal
