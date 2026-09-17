@@ -135,14 +135,14 @@ export function HeroSection() {
       <ViewfinderOverlay />
 
       <div className="u-shell flex min-h-0 flex-1 flex-col py-16 sm:py-20">
-        <div className="grid flex-1 gap-y-12 md:grid-cols-12 md:gap-x-6">
+      <div className="grid flex-1 content-start gap-y-7.5 md:grid-cols-12 md:gap-x-6">
           {/* Entire Left column — intro label, name, tagline, links */}
           <div className="flex min-w-0 flex-col md:col-span-8 md:pt-2">
             <div ref={topStripRef} style={{ opacity: 0 }}>
               <HashtagLabel index="00" label="i'm" />
             </div>
 
-            <div className="flex flex-col pt-8 sm:pt-2.5">
+            <div className="flex flex-col pt-2.5 sm:pt-2.5">
               
             <h1 className="font-medium tracking-[-0.025em] uppercase leading-[0.9] text-[clamp(2.75rem,16vw,8rem)]">
               {site.hero.nameLines.map((line, li) => (
@@ -165,9 +165,9 @@ export function HeroSection() {
               ))}
             </h1>
 
-            <div className="mt-8 max-w-xl sm:mt-10">
+            <div className="mt-5 max-w-xl sm:mt-10">
               {/* Viewfinder-framed tagline */}
-              <div className="relative inline-flex max-w-full flex-col gap-3 border border-rule p-4 sm:p-5">
+          <div className="relative flex w-full max-w-full flex-col gap-2 border border-rule p-3.5 sm:inline-flex sm:w-auto sm:gap-3 sm:p-5">
                 <span
                   aria-hidden
                   className="pointer-events-none absolute -left-px -top-px h-3 w-3 border-l-2 border-t-2 border-red"
@@ -185,16 +185,19 @@ export function HeroSection() {
                   className="pointer-events-none absolute -bottom-px -right-px h-3 w-3 border-b-2 border-r-2 border-red"
                 />
 
-                <div className="flex items-center gap-3">
-                  <ApertureIcon size={36} className="shrink-0 text-red" />
-                  <span className="hero-tagline text-[clamp(1rem,2vw,1.5rem)] font-medium uppercase leading-[1.1] tracking-[-0.01em] text-ink">
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <ApertureIcon
+                    size={32}
+                    className="h-7 w-7 shrink-0 text-red sm:h-9 sm:w-9"
+                  />
+                  <span className="hero-tagline text-[clamp(0.85rem,2vw,1.5rem)] font-medium uppercase leading-[1.1] tracking-[-0.01em] text-ink">
                     <span className="hero-tagline-focus">
                       {site.hero.tagline}
                     </span>
                   </span>
                 </div>
 
-                <div className="u-label u-tabular flex flex-wrap items-center gap-2.5 text-mute">
+                <div className="u-label u-tabular flex flex-wrap items-center gap-2 text-mute sm:gap-2.5">
                   <span>{site.hero.viewfinder.aperture}</span>
                   <span aria-hidden className="u-slash">
                     /
@@ -208,7 +211,7 @@ export function HeroSection() {
               </div>
 
               {/* Social links — beneath the tagline */}
-              <div className="mt-6 flex flex-wrap items-center gap-3">
+              <div className="mt-3.5 flex flex-nowrap items-center gap-1 sm:gap-3">
                 {socials.map((social) => {
                   const http = isHttpUrl(social.href);
                   return (
@@ -217,10 +220,10 @@ export function HeroSection() {
                       href={social.href}
                       target={http ? "_blank" : undefined}
                       rel={http ? "noopener noreferrer" : undefined}
-                      className="group inline-flex items-center gap-2 border border-rule px-4 py-2 text-[0.6875rem] font-medium uppercase tracking-[0.06em] text-ink transition-colors hover:border-ink hover:text-red"
+                      className="group inline-flex min-w-0 flex-1 items-center justify-center gap-1 border border-rule px-1.5 py-2 text-[0.6rem] font-medium uppercase tracking-[0.04em] text-ink transition-colors hover:border-ink hover:text-red sm:flex-none sm:gap-2 sm:px-4 sm:text-[0.6875rem] sm:tracking-[0.06em]"
                     >
                       <social.Icon size={14} className="shrink-0" />
-                      {social.label}
+                      <span className="whitespace-nowrap">{social.label}</span>
                       <span
                         aria-hidden
                         className="transition-transform group-hover:translate-x-0.5"
@@ -238,13 +241,13 @@ export function HeroSection() {
           {/* Right column — metadata, main site, scroll */}
           <aside className="flex min-w-0 flex-col md:col-span-4 md:pt-2">
             {/* Metadata header — red tick accent + a hairline that draws in */}
-            <p className="u-label mb-3 flex items-center gap-2 text-mute">
+            <p className="u-label mb-2.5 flex items-center gap-2 text-mute sm:mb-3">
               <span aria-hidden className="inline-block h-1.5 w-1.5 bg-red" />
               [ Metadata ]
             </p>
             <AnimatedHairline className="h-px w-full" />
 
-            <dl className="mt-5 space-y-3.5">
+            <dl className="mt-2.5 space-y-2 sm:mt-5 sm:space-y-3.5">
               {metaRows.map((row) => (
                 <div key={row.label} className="group flex items-center gap-3">
                   <dt className="u-label shrink-0 transition-colors group-hover:text-ink">
@@ -262,14 +265,14 @@ export function HeroSection() {
             </dl>
 
             {/* Divider between metadata and the Main Site button */}
-            <div aria-hidden className="mt-8 h-px w-full bg-rule" />
+            <div aria-hidden className="mt-2.5 h-px w-full bg-rule sm:mt-8" />
 
             {/* Main Site — full column width, matching the metadata panel */}
             <Link
               href={site.personalWebsiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-8 flex w-full items-center justify-between gap-2 bg-red px-5 py-3 text-[0.6875rem] font-medium uppercase tracking-[0.06em] text-paper shadow-[3px_3px_0_rgb(var(--ink))] transition-all hover:bg-ink hover:shadow-[1px_1px_0_rgb(var(--red))]"
+              className="group mt-5 flex w-full items-center justify-between gap-2 bg-red px-5 py-3 text-[0.6875rem] font-medium uppercase tracking-[0.06em] text-paper shadow-[3px_3px_0_rgb(var(--ink))] transition-all hover:bg-ink hover:shadow-[1px_1px_0_rgb(var(--red))] sm:mt-8"
             >
               <span className="inline-flex items-center gap-2">
                 <GlobeIcon size={16} className="shrink-0 text-paper" />
@@ -287,7 +290,7 @@ export function HeroSection() {
             <a
               href="#work"
               aria-label="Scroll to works"
-              className="group u-label mt-6 inline-flex items-center gap-3 text-mute transition-colors hover:text-ink"
+              className="group u-label mt-4 inline-flex items-center gap-3 text-mute transition-colors hover:text-ink sm:mt-6"
             >
               <span
                 aria-hidden
