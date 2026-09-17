@@ -134,7 +134,7 @@ export function HeroSection() {
     >
       <ViewfinderOverlay />
 
-      <div className="u-shell flex min-h-0 flex-1 flex-col py-16 sm:py-20">
+      <div className="u-shell flex min-h-0 flex-1 flex-col py-15 sm:py-20">
       <div className="grid flex-1 content-start gap-y-7.5 md:grid-cols-12 md:gap-x-6">
           {/* Entire Left column — intro label, name, tagline, links */}
           <div className="flex min-w-0 flex-col md:col-span-8 md:pt-2">

@@ -8,7 +8,7 @@ type Row = { term: string; items: readonly string[] };
 
 function GearChip({ index, label }: { index: number; label: string }) {
   return (
-    <span className="relative inline-flex items-center gap-2.5 border border-rule px-3.5 py-2">
+    <span className="relative inline-flex min-w-0 flex-1 items-center gap-1.5 border border-rule px-1.5 py-1.5 text-[0.6875rem] leading-tight sm:flex-none sm:gap-2.5 sm:px-3.5 sm:py-2 sm:text-base sm:leading-normal">
       <CornerBrackets />
       <span className="u-label u-tabular text-red">
         {String(index).padStart(2, "0")}
@@ -27,7 +27,7 @@ export function InfoSection() {
 
   return (
     <section id="info" className="u-rule-t scroll-mt-24">
-      <div className="u-shell py-20 sm:py-28">
+      <div className="u-shell py-10 sm:py-28">
         <HashtagLabel index="04" label="my weapons" />
 
         <HeadingReveal
@@ -45,7 +45,7 @@ export function InfoSection() {
             >
               <dt className="u-label col-span-12 sm:col-span-3">{row.term}</dt>
               <dd className="col-span-12 mt-3 text-[0.875rem] leading-[1.55] text-ink sm:col-span-9 sm:mt-0 md:text-[1rem]">
-                <span className="flex flex-wrap gap-2.5">
+                <span className="flex flex-nowrap gap-1 sm:flex-wrap sm:gap-2.5">
                   {row.items.map((item, j) => (
                     <GearChip key={item} index={j + 1} label={item} />
                   ))}

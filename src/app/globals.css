@@ -222,6 +222,13 @@ html[data-theme="dark"] .u-gridbg {
   margin-right: 0;
 }
 
+@media (max-width: 639px) {
+  .u-tag {
+    padding: 0.24rem 0.45rem;
+    font-size: 0.6rem;
+  }
+}
+
 /* Decorative slash mark */
 .u-slash {
   color: rgb(var(--red));
@@ -479,4 +486,3 @@ html[data-theme="dark"] .u-gridbg {
     letter-spacing: -0.01em;
   }
 }
-

@@ -8,7 +8,7 @@ import { Reveal } from "@/components/primitives/reveal";
 export function AboutSection() {
   return (
     <section id="about" className="u-rule-t scroll-mt-24">
-      <div className="u-shell py-20 sm:py-28">
+      <div className="u-shell py-10 sm:py-28">
         <HashtagLabel index="01" label="myself" />
 
         <div className="u-grid mt-10 items-start gap-y-12">

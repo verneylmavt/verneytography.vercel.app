@@ -41,7 +41,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="u-rule-t scroll-mt-24">
-      <div className="u-shell py-20 sm:py-28">
+      <div className="u-shell py-10 sm:py-28">
         <HashtagLabel index="05" label="reach me" />
 
         <HeadingReveal
@@ -57,7 +57,7 @@ export function ContactSection() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-px border border-rule bg-rule sm:grid-cols-3">
+        <div className="mt-7.5 grid grid-cols-1 gap-px border border-rule bg-rule sm:mt-12 sm:grid-cols-3">
           {links.map((link, i) => {
             const http = isHttpUrl(link.href);
             return (
@@ -66,13 +66,13 @@ export function ContactSection() {
                 href={link.href}
                 target={http ? "_blank" : undefined}
                 rel={http ? "noopener noreferrer" : undefined}
-                className="group relative block overflow-hidden bg-paper p-4 sm:p-8"
+                className="group relative block overflow-hidden bg-paper p-2.5 sm:p-8"
               >
                 <span
                   aria-hidden
                   className="absolute inset-0 origin-bottom scale-y-0 bg-red transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-y-100 group-focus-visible:scale-y-100 motion-reduce:transition-none"
                 />
-                <span className="relative z-10 flex h-full flex-col justify-between gap-12">
+                <span className="relative z-10 flex h-full flex-col justify-between gap-5 sm:gap-12">
                   <span className="flex items-center justify-between text-[0.6875rem] uppercase tracking-[0.06em] text-mute transition-colors group-hover:text-paper group-focus-visible:text-paper">
                     <span className="flex items-center gap-2">
                       <link.Icon size={14} className="shrink-0" />
@@ -85,7 +85,7 @@ export function ContactSection() {
                       <span aria-hidden>↗</span>
                     </span>
                   </span>
-                  <span className="break-words text-[0.875rem] text-ink transition-colors group-hover:text-paper group-focus-visible:text-paper md:text-[1rem]">
+                  <span className="break-words text-[0.75rem] text-ink transition-colors group-hover:text-paper group-focus-visible:text-paper sm:text-[0.875rem] md:text-[1rem]">
                     {displayHandle(link.label, link.href)}
                   </span>
                 </span>
@@ -95,7 +95,7 @@ export function ContactSection() {
         </div>
 
         <Reveal>
-          <footer className="u-grid mt-16 items-center gap-y-3 border-t border-rule pt-8">
+          <footer className="!hidden u-grid mt-16 items-center gap-y-3 border-t border-rule pt-8 sm:!grid">
             <p className="u-label col-span-12 flex items-center gap-2 sm:col-span-4">
               <span aria-hidden className="inline-block h-1.5 w-1.5 bg-red" />
               ©{site.brand}
